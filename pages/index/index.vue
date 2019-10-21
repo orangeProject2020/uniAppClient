@@ -3,6 +3,15 @@
 		<image class="logo" src="/static/logo.png"></image>
 		<view class="text-area">
 			<text class="title">{{title}}</text>
+      <view class="">
+       <navigator url="/pages/auth/login" hover-class="navigator-hover">
+            <button type="default">注册</button>
+        </navigator>
+      </view>
+      <view class="text-red">
+        aaaaaaa
+      </view>
+       
 		</view>
 	</view>
 </template>

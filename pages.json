@@ -23,7 +23,27 @@
     	"style": {
     		"navigationBarTitleText": "注册"
     	}
+    },
+    {
+    	"path": "pages/auth/bind",
+    	"style": {
+    		"navigationBarTitleText": "用户绑定"
+    	}
+    },
+    {
+    	"path": "pages/auth/forgetPassword",
+    	"style": {
+    		"navigationBarTitleText": "忘记密码"
+    	}
     }
+    // #ifdef MP-WEIXIN
+    ,{
+      "path": "pages/auth/mini",
+      "style": {
+      	"navigationBarTitleText": "授权"
+      }
+    }
+    // #endif
 	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
