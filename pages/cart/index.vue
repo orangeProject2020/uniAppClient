@@ -42,6 +42,7 @@
     onShow() {
       // wvCart.reload()
       if (wvCart) {
+        console.log('cart reload')
         wvCart.loadURL(this.url + '&t=' + Date.now())
       }
     }

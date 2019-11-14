@@ -10,6 +10,17 @@
 		// 	}
 		// },
     {
+    	"path": "pages/user/index",
+    	"style": {
+    		"navigationBarTitleText": "个人中心",
+        "app-plus":{
+          "titleNView":{
+            "type":"transparent"
+          }
+        }
+    	}
+    },
+    {
     	"path": "pages/mall/index",
     	"style": {
     		"navigationBarTitleText": "商城",
@@ -28,22 +39,32 @@
     	}
     },
     {
-    	"path": "pages/user/index",
+    	"path": "pages/user/wv",
     	"style": {
-    		"navigationBarTitleText": "个人中心"
+    		"navigationBarTitleText": ""
     	}
     },
     
     {
     	"path": "pages/auth/login",
     	"style": {
-    		"navigationBarTitleText": "登录"
+    		"navigationBarTitleText": "登录",
+        "app-plus":{
+          "titleNView":{
+            "type":"transparent"
+          }
+        }
     	}
     },
     {
     	"path": "pages/auth/register",
     	"style": {
-    		"navigationBarTitleText": "注册"
+    		"navigationBarTitleText": "注册",
+        "app-plus":{
+          "titleNView":{
+            "type":"transparent"
+          }
+        }
     	}
     },
     {

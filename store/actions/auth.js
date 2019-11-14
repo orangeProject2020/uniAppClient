@@ -8,7 +8,7 @@ export default {
   },
   
   async authLogin(store, data) {
-    let ret = await Request.post('/user/auth/login')
+    let ret = await Request.post('/user/auth/login', data)
     return ret
   },
 }

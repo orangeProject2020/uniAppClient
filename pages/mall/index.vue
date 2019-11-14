@@ -14,6 +14,10 @@
       }
     },
     onReady() {
+      let token = uni.getStorageSync('user_auth_token') || ''
+      let url = this.url + '&token=' + token
+      console.log('url:', url)
+      
       let createWV = (top) => {
         var currentWebview = this.$mp.page.$getAppWebview() //获取当前页面的webview对象
         setTimeout(function() {

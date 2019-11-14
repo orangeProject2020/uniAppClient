@@ -1,0 +1,117 @@
+body {
+  background-color: #f1f1f1;
+  /* font-size: 62.5%; */
+}
+
+uni-button {
+  border: none;
+  background: none;
+}
+
+uni-button:after {
+  border: none;
+}
+
+.h-8 {
+  height: 80upx;
+}
+
+.p-2 {
+  padding: 10upx;
+}
+
+.p-4 {
+  padding: 40upx;
+}
+
+.py-2 {
+  padding-top: 20upx;
+  padding-bottom: 20upx;
+}
+
+.px-4 {
+  padding-left: 40upx;
+  padding-right: 40upx;
+}
+
+.mt-4 {
+  margin-top: 40upx;
+}
+
+.mt-8 {
+  margin-top: 80upx;
+}
+
+.mt-16 {
+  margin-top: 160upx;
+}
+
+.mb-4 {
+  margin-bottom: 40upx;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-sm {
+  font-size: 20upx;
+}
+
+.text-lg {
+  font-size: 28upx;
+}
+
+.text-5xl {
+  font-size: 80upx;
+}
+
+.text-white {
+  color: #FFFFFF;
+}
+
+.rounded-lg {
+  border-radius: 16upx;
+}
+
+.rounded-full {
+  border-radius: 9999upx;
+}
+
+.bg-white {
+  background-color: #FFFFFF;
+}
+
+.text-gray-500 {
+  color: #a0aec0;
+}
+
+.text-gray-600 {
+  color: #718096;
+}
+
+.text-indigo-700 {
+  color: #4c51bf;
+}
+
+.bg-indigo-700 {
+  background-color: #4c51bf;
+}
+
+.inline-block  {
+  display: inline-block;
+}
+
+.border-b {
+  border-bottom: 1upx solid #EEEEEE;
+}
+
+
+
+
+
+
+
+
+
+
