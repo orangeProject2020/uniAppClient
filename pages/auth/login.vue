@@ -8,8 +8,8 @@
         <view class="text-gray-500 text-lg">
           Mobile
         </view>
-        <view class="border-b">
-          <input type="text" v-model="formData.mobile" class="text-lg p-2" required />
+        <view class="border-b p-2">
+          <input type="text" v-model="formData.mobile" class="text-lg text-bold" required />
         </view>
       </view>
 
@@ -17,8 +17,8 @@
         <view class="text-gray-500 text-lg">
           Password
         </view>
-        <view class="border-b">
-          <input type="text" v-model="formData.password" password="" class="text-lg p-2" required />
+        <view class="border-b p-2">
+          <input type="text" v-model="formData.password" password="" class="text-lg text-bold" required />
         </view>
       </view>
 

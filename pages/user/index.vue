@@ -26,6 +26,10 @@
         </view>
       </view>
     </view>
+    
+    <view class="p-4" v-if="isLogin">
+      <button type="warn" @click="onLogout">退出</button>
+    </view>
   </view>
 </template>
 
@@ -34,7 +38,8 @@
   export default {
     data(){
       return {
-        isLogin: false
+        isLogin: false,
+        user: false
       }
     },
     methods:{
@@ -54,6 +59,12 @@
         
         uni.navigateTo({
           url:'/pages/user/wv?type=' + type
+        })
+      },
+      onLogout(){
+        uni.setStorageSync('user_auth_token', '')
+        uni.switchTab({
+          url:'/pages/mall/index'
         })
       }
     },

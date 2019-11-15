@@ -11,4 +11,14 @@ export default {
     let ret = await Request.post('/user/auth/login', data)
     return ret
   },
+  
+  async authRegister(store, data) {
+    let ret = await Request.post('/user/auth/register', data)
+    return ret
+  },
+  
+  async authForgetPassword(store, data) {
+    let ret = await Request.post('/user/auth/forgetPassword', data)
+    return ret
+  }
 }

@@ -26,7 +26,7 @@
             top: top,
             bottom: 0
           })
-           wvIndex.loadURL(this.url)
+           wvIndex.loadURL(url)
         }, 1000); //如果是页面初始化调用时，需要延时一下
       }
       // #ifdef APP-PLUS
@@ -42,8 +42,19 @@
     },
     
     onLoad() {
-      
-        
+  
+    },
+    onShow() {
+      let lastToken = this.$store.state.lastToken || ''
+      console.log('/onShow lastToken:', lastToken)
+      let currentToken = uni.getStorageSync('user_auth_token') || ''
+      console.log('/onShow currentToken:', currentToken)
+      if (lastToken != currentToken){
+        this.$store.state.lastToken = currentToken
+        let url = this.url + '&token=' + (currentToken || '0')
+        console.log('/onShow url:', url)
+        wvIndex.loadURL(url)
+      }
     }
   };
 </script>

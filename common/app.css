@@ -17,7 +17,7 @@ uni-button:after {
 }
 
 .p-2 {
-  padding: 10upx;
+  padding: 20upx;
 }
 
 .p-4 {
@@ -34,6 +34,10 @@ uni-button:after {
   padding-right: 40upx;
 }
 
+.mt-2 {
+  margin-top: 20upx;
+}
+
 .mt-4 {
   margin-top: 40upx;
 }
@@ -46,6 +50,10 @@ uni-button:after {
   margin-top: 160upx;
 }
 
+.mb-2 {
+  margin-bottom: 20upx;
+}
+
 .mb-4 {
   margin-bottom: 40upx;
 }
@@ -56,6 +64,10 @@ uni-button:after {
 
 .text-sm {
   font-size: 20upx;
+}
+
+.text-base {
+  font-size: 24upx;
 }
 
 .text-lg {
