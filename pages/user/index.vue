@@ -229,7 +229,9 @@
     </view>
       
     <view class="p-4" v-if="isLogin">
-      <button type="warn" @click="onLogout">退出</button>
+      <view class="text-center text-blue" @click="onLogout">
+        退出
+      </view>
     </view>
   </view>
 </template>
