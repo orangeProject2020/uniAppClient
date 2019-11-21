@@ -10,12 +10,48 @@
     <view class="user-func-list">
       <view class="uni-flex bg-white p-4 uni-border-bottom" @click="goToUrl('mallOrder')">
         <view class="uni-flex-item">
-          订单管理
+          所有订单
         </view>
         <view class="uni-flex-item text-right">
           >
         </view>
       </view>
+			
+			<view class="uni-flex bg-white p-4 uni-border-bottom" @click="goToUrl('mallProfit')">
+			  <view class="uni-flex-item">
+			    收益记录
+			  </view>
+			  <view class="uni-flex-item text-right">
+			    >
+			  </view>
+			</view>
+			
+			<view class="uni-flex bg-white p-4 uni-border-bottom" @click="goToUrl('orderComment')">
+			  <view class="uni-flex-item">
+			    评价中心
+			  </view>
+			  <view class="uni-flex-item text-right">
+			    >
+			  </view>
+			</view>
+			
+			<view class="uni-flex bg-white p-4 uni-border-bottom" @click="goToUrl('orderAfter')">
+			  <view class="uni-flex-item">
+			    售后/ 退换货
+			  </view>
+			  <view class="uni-flex-item text-right">
+			    >
+			  </view>
+			</view>
+			
+			<view class="uni-flex bg-white p-4 uni-border-bottom" @click="goToUrl('mallCollect')">
+			  <view class="uni-flex-item">
+			    商品收藏
+			  </view>
+			  <view class="uni-flex-item text-right">
+			    >
+			  </view>
+			</view>
       
       <view class="uni-flex bg-white p-4" @click="goToUrl('mallAddress')">
         <view class="uni-flex-item">
