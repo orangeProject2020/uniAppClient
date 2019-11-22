@@ -17,49 +17,53 @@ uni-button:after {
 }
 
 .h-8 {
-  height: 80upx;
+  height: 80rpx;
 }
 
 .p-2 {
-  padding: 20upx;
+  padding: 20rpx;
+}
+
+.p-3 {
+	padding: 30rpx;
 }
 
 .p-4 {
-  padding: 40upx;
+  padding: 40rpx;
 }
 
 .py-2 {
-  padding-top: 20upx;
-  padding-bottom: 20upx;
+  padding-top: 20rpx;
+  padding-bottom: 20rpx;
 }
 
 .px-4 {
-  padding-left: 40upx;
-  padding-right: 40upx;
+  padding-left: 40rpx;
+  padding-right: 40rpx;
 }
 
 .mt-2 {
-  margin-top: 20upx;
+  margin-top: 20rpx;
 }
 
 .mt-4 {
-  margin-top: 40upx;
+  margin-top: 40rpx;
 }
 
 .mt-8 {
-  margin-top: 80upx;
+  margin-top: 80rpx;
 }
 
 .mt-16 {
-  margin-top: 160upx;
+  margin-top: 160rpx;
 }
 
 .mb-2 {
-  margin-bottom: 20upx;
+  margin-bottom: 20rpx;
 }
 
 .mb-4 {
-  margin-bottom: 40upx;
+  margin-bottom: 40rpx;
 }
 
 .text-center {
@@ -67,19 +71,19 @@ uni-button:after {
 }
 
 .text-sm {
-  font-size: 20upx;
+  font-size: 20rpx;
 }
 
 .text-base {
-  font-size: 24upx;
+  font-size: 24rpx;
 }
 
 .text-lg {
-  font-size: 28upx;
+  font-size: 28rpx;
 }
 
 .text-5xl {
-  font-size: 80upx;
+  font-size: 80rpx;
 }
 
 .text-white {
@@ -87,11 +91,11 @@ uni-button:after {
 }
 
 .rounded-lg {
-  border-radius: 16upx;
+  border-radius: 16rpx;
 }
 
 .rounded-full {
-  border-radius: 9999upx;
+  border-radius: 9999rpx;
 }
 
 .bg-white {
@@ -119,7 +123,7 @@ uni-button:after {
 }
 
 .border-b {
-  border-bottom: 1upx solid #EEEEEE;
+  border-bottom: 1rpx solid #EEEEEE;
 }
 
 
