@@ -43,37 +43,83 @@
 			</view>
 		</view>
 		
-		<view class="index-packages-section">
-			<view class="uni-flex index-packages-head p-3 ">
-				<view class="uni-flex-item index-packages-title">
+		<view class="index-section index-packages-section ">
+			<view class="uni-flex index-section-head index-section-head p-3 ">
+				<view class="uni-flex-item index-section-title">
 					特惠套餐
 				</view>
-				<view class="uni-flex-item text-right index-packages-more">
+				<view class="uni-flex-item text-right index-section-more">
 					更多
 				</view>
 			</view>
-			<view class="index-packages text-center">
-				<view class="index-packages-item" style="height: 240rpx;">
-					<view class="" style="width: 360rpx;">
-						特惠套餐1
+			<view class="uni-flex flex-wrap text-center index-packages">
+				<view class="uni-flex-item" >
+					<view class="index-packages-item">
+						<image src="" mode="" class="index-packages-img"></image>
 					</view>
 				</view>
-				<view class="index-packages-item" style="height: 240rpx;">
-					<view class="" style="width: 360rpx;height: 240rpx;">
-						特惠套餐2
+				<view class="uni-flex-item" >
+					<view class="index-packages-item">
+						<image src="" mode="" class="index-packages-img"></image>
 					</view>
 				</view>
-				<view class="index-packages-item" style="height: 240rpx;">
-					<view class="" style="width: 360rpx;height: 240rpx;">
-						特惠套餐3
+				<view class="uni-flex-item" >
+					<view class="index-packages-item">
+						<image src="" mode="" class="index-packages-img"></image>
 					</view>
 				</view>
-				<view class="index-packages-item" style="height: 240rpx;">
-					<view class="" style="width: 360rpx;height: 240rpx;">
-						特惠套餐4
+				<view class="uni-flex-item" >
+					<view class="index-packages-item">
+						<image src="" mode="" class="index-packages-img"></image>
 					</view>
 				</view>
 			</view>
+		</view>
+		
+		<view class="index-section mt-2">
+			<view class="uni-flex index-section-head p-3">
+				<view class="uni-flex-item index-section-title ">
+					为你推荐
+				</view>
+				<view class="uni-flex-item text-right index-section-more">
+					更多
+				</view>
+			</view>
+			<view class="uni-flex flex-wrap p-3 index-recommend text-center">
+				<view class="uni-flex-item ">
+					<view class="index-recommend-item">
+						<image src="" mode="" class="index-recommend-img"></image>
+						<view class="index-recommend-name">
+							推荐一1
+						</view>
+					</view>
+				</view>
+				<view class="uni-flex-item ">
+					<view class="index-recommend-item">
+						<image src="" mode="" class="index-recommend-img"></image>
+						<view class="index-recommend-name">
+							推荐一2
+						</view>
+					</view>
+				</view>
+				<view class="uni-flex-item ">
+					<view class="index-recommend-item">
+						<image src="" mode="" class="index-recommend-img"></image>
+						<view class="index-recommend-name">
+							推荐一3
+						</view>
+					</view>
+				</view>
+				<view class="uni-flex-item ">
+					<view class="index-recommend-item">
+						<image src="" mode="" class="index-recommend-img"></image>
+						<view class="index-recommend-name">
+							推荐一4
+						</view>
+					</view>
+				</view>
+			</view>
+			
 		</view>
   </view>
 </template>
@@ -106,6 +152,7 @@
 <style lang="less">
 	.page-index {
 		background: #FFFFFF;
+		padding-bottom: 200rpx;
 	}
 	
 	.index-good-cates {
@@ -136,12 +183,12 @@
     }
   }
 	
-	.index-packages-section {
-		.index-packages-head {
+	.index-section {
+		.index-section-head {
 			border-top: 8rpx solid #3D6BFA;
 			border-bottom: 1rpx solid #EEEEEE;
 		}
-		.index-packages-title {
+		.index-section-title {
 			font-size: 26rpx;
 			font-weight: bold;
 			color: #3D6BFA;
@@ -150,11 +197,43 @@
 	}
 	
 	.index-packages {
-		height: 480rpx;
+	
 		.index-packages-item {
-			float: left;
-			width: 50%;
-			height: 240rpx;
+			width: 375rpx;
+			margin-top: 30rpx;
+			
+			.index-packages-img {
+				width: 300rpx;
+				height: 200rpx;
+				display: inline-block;
+				background: #EEEEEE;
+				border-radius: 8rpx;
+				margin-bottom: 0;
+			}
+			
+			.index-packages-name {
+				color: #666666;
+			}
 		}
 	}
+	
+	.index-recommend {
+		.index-recommend-item {
+			width: 345rpx;
+		}
+		
+		.index-recommend-img {
+			background: #EEEEEE;
+			border-radius: 8rpx;
+			width: 240rpx;
+			height: 240rpx;
+			display: inline-block;
+			margin-top: 30rpx;
+		}
+		
+		.index-recommend-name {
+			color: #666666;
+		}
+	}
+	
 </style>
