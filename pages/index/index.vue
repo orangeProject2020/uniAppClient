@@ -1,5 +1,10 @@
 <template>
   <view class="page-index">
+		
+		<uni-nav-bar right-icon="email" :shadow="false" background-color="none">
+		    <input type="text" value="" class="index-search"/>
+		</uni-nav-bar>
+		
     <swiper class="swiper-banner" :indicator-dots="swiper.indicatorDots" :autoplay="swiper.autoplay" :interval="swiper.interval" 
       :duration="swiper.duration">
       <swiper-item>
@@ -125,11 +130,13 @@
 </template>
 
 <script>
-	import {uniNoticeBar,uniCountdown} from "@dcloudio/uni-ui"
+	import {uniNoticeBar,uniCountdown,uniNavBar,uniSearchBar} from "@dcloudio/uni-ui"
   export default {
 		components:{
 			uniNoticeBar,
-			uniCountdown
+			uniCountdown,
+			uniNavBar,
+			uniSearchBar
 		},
     data() {
       return {
@@ -139,7 +146,10 @@
           autoplay: true,
           interval: 2000,
           duration: 500
-        }
+        },
+				search: {
+					clearButton: 'none'
+				}
       }
     },
     async onLoad() {},
