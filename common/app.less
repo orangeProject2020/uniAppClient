@@ -1,0 +1,277 @@
+@font-face {
+  font-family: 'webfont';
+  font-display: swap;
+  src: url('https://at.alicdn.com/t/webfont_t7uh9s1k3ih.ttf') format('truetype');
+}
+
+@colorPrimary: #3D6BFA;
+@colorPrimarySub: #1989fa;
+@colorGray: #4a5568;
+@colorGraySub: #718096;
+@colorDark:#2d3748;
+@colorDarker: #1a202c;
+@colorLight: #edf2f7;
+@colorLighter:#f7fafc;
+
+body, html {
+  font-family:"webfont" !important;
+  // font-size:16px;
+  font-size: 63%;
+  font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-stroke-width: 0.2px;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: lighter;
+}
+
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap
+}
+
+.navbar {
+  width: 100%;
+}
+
+.status_bar {
+    height: var(--status-bar-height);
+    width: 100%;
+  }
+  
+.navbar-content {
+  height:60rpx;
+  padding: 20rpx 0;
+  line-height: 60rpx;
+  width: 100%;
+  display: flex;
+  overflow: hidden;
+  align-items: top;
+  color: #FFFFFF;
+  
+  .navbar-item {
+    // flex: 1;
+  }
+  .navbar-left {
+    margin-left: 30rpx;
+  }
+  .navbar-avatar {
+    height: 60rpx;
+    width: 60rpx;
+    display: inline-block;
+    border-radius: 60rpx;
+    background: #FFFFFF;
+  }
+  
+  .navbar-title {
+    line-height: 60rpx;
+    vertical-align: top;
+    font-weight: 600;
+    padding-left: 20rpx;
+    font-size: 30rpx;
+  }
+  
+  .navbar-icon-right {
+    margin-right: 30rpx;
+  }
+}
+
+.navbar-fix {
+  position: fixed;
+  top: 0;
+  z-index: 10000;
+}
+
+
+// 重写uni.css
+uni-button {
+  border: none;
+  background: none;
+}
+
+uni-button:after {
+  border: none;
+}
+
+// 全局样式
+
+.flex {
+  display: flex;
+  flex-direction: row;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.flex-cloumn {
+  flex-direction: column;
+}
+
+.flex-item {
+  flex: 1;
+}
+
+
+// 背景
+.big-white {
+  background: #FFFFFF;
+}
+.bg-primary {
+  background: linear-gradient(to right, @colorPrimarySub, @colorPrimary);
+}
+
+.bg-light {
+  background: linear-gradient(to bottom right, @colorLighter, @colorLight);
+}
+
+// 位置
+.inline-block {
+  display: inline-block;
+}
+
+.vertical-top {
+  vertical-align: top;
+}
+
+
+// 对其方式
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+// 字体大小
+.text-xs {
+  font-size: 1rem;
+}
+
+.text-sm {
+  font-size: 1.2rem;
+}
+
+.text-base {
+  font-size: 1.3rem;
+}
+
+.text-lg {
+  font-size: 1.4rpx;
+}
+
+.text-xl {
+  font-size: 1.6rpx;
+}
+
+.text-5xl {
+  font-size: 4rem;
+}
+
+// 背景
+.bg-grey {
+  background: #fafafa;
+}
+
+.h-8 {
+  height: 80rpx;
+}
+
+.p-2 {
+  padding: 20rpx;
+}
+
+.p-3 {
+	padding: 30rpx;
+}
+
+.p-4 {
+  padding: 40rpx;
+}
+
+.py-2 {
+  padding-top: 20rpx;
+  padding-bottom: 20rpx;
+}
+
+.px-4 {
+  padding-left: 40rpx;
+  padding-right: 40rpx;
+}
+
+.mt-2 {
+  margin-top: 20rpx;
+}
+
+.mt-4 {
+  margin-top: 40rpx;
+}
+
+.mt-8 {
+  margin-top: 80rpx;
+}
+
+.mt-16 {
+  margin-top: 160rpx;
+}
+
+.mb-2 {
+  margin-bottom: 20rpx;
+}
+
+.mb-4 {
+  margin-bottom: 40rpx;
+}
+
+
+
+.text-white {
+  color: #FFFFFF;
+}
+
+.rounded-lg {
+  border-radius: 16rpx;
+}
+
+.rounded-full {
+  border-radius: 9999rpx;
+}
+
+.bg-white {
+  background-color: #FFFFFF;
+}
+
+.text-gray-500 {
+  color: #a0aec0;
+}
+
+.text-gray-600 {
+  color: #718096;
+}
+
+.text-indigo-700 {
+  color: #4c51bf;
+}
+
+.bg-indigo-700 {
+  background-color: #4c51bf;
+}
+
+.inline-block  {
+  display: inline-block;
+}
+
+.border-b {
+  border-bottom: 1rpx solid #EEEEEE;
+}
+
+
+
+
+
+
+
+
+
+

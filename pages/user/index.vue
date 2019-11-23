@@ -1,20 +1,42 @@
 <template>
-  <view class="">
-    <view class="uni-flex user-profile-title">
-      <view class="uni-flex-item">
-        <image src="../../static/icon/user_a.png" mode="" class="user-avatar"></image>
-      </view>
-      <view class="uni-flex-item ">
-        <view class="text-white user-name">
-          用户昵称
+  <view class="page-user-index">
+    
+    <view class="bg-primary navbar navbar-fix" >
+      <view class="status_bar"></view>
+      <view class="navbar-content" >
+        <view class="navbar-item flex-item " :style="{opacity: navbar.opacity}">
+          <view class="navbar-avatar navbar-left">
+              <image :src="userData.avatar" mode="scaleToFill" class="navbar-avatar"></image>
+          </view>
+          <view class="inline-block navbar-title">
+            {{ userData.username }}
+          </view>
+        </view>
+        <view class="navbar-item flex-item text-right">
+          <view class="navbar-icon-right">
+             <uni-icons type="gear" size="30" color="#fff"></uni-icons>
+            <uni-icons type="email" size="30" color="#fff"></uni-icons>
+          </view>
         </view>
       </view>
-      <view class="uni-flex-item text-right">
-        <view class="text-white user-setting-nav">
-          <image src="/static/icon/setting.png" mode="" style="width: 64rpx;height: 64rpx;"></image>
+    </view>
+    
+    <view class="user-index-header bg-primary">
+      <view class="user-index-header-content p-3 flex">
+        <view class="flex-item">
+          <view class="user-index-avatar inline-block">
+            <image :src="userData.avatar" mode="scaleToFill" class="user-index-avatar"></image>
+          </view>
+           <view class="inline-block vertical-top" style="">
+             <view class="text-white user-index-name">
+               {{userData.username}}
+             </view>
+           </view>
+        </view>
+        <view class="text-right">
+          
         </view>
       </view>
-      
     </view>
     
     <view class="uni-flex text-center user-assets-box">
@@ -31,11 +53,11 @@
           ￥100.00
         </view>
         <view class="assets-title">
-          预计分红 ？
+          预计分红 <uni-icons type="help" size="15" color="#999"></uni-icons>
         </view>
       </view>
       <view class="uni-flex-item">
-        <view class="assets-num ">
+        <view class="assets-num">
           2
         </view>
         <view class="assets-title">
@@ -50,11 +72,11 @@
           我的订单
         </view>
         <view class="uni-flex-item text-right nav" @click="goToUrl('mallOrder')">
-          所有
+          所有 <uni-icons type="arrowright" size="12" color="#999"></uni-icons>
         </view>
       </view>
       <view class="uni-flex text-center user-item-card-icons">
-        <view class="uni-flex-item" @click="goToUrl('mallOrder0')">
+        <view class="item" @click="goToUrl('mallOrder0')">
           <view class="">
             <image src="/static/icon/order_0.png" mode="" class="icon"></image>
           </view>
@@ -63,7 +85,7 @@
           </view>
         </view>
         
-        <view class="uni-flex-item" @click="goToUrl('mallOrder1')">
+        <view class="item" @click="goToUrl('mallOrder1')">
           <view class="">
             <image src="/static/icon/order_1.png" mode="" class="icon"></image>
           </view>
@@ -72,7 +94,7 @@
           </view>
         </view>
         
-        <view class="uni-flex-item" @click="goToUrl('mallOrder2')">
+        <view class="item" @click="goToUrl('mallOrder2')">
           <view class="">
             <image src="/static/icon/order_2.png" mode="" class="icon"></image>
           </view>
@@ -81,7 +103,7 @@
           </view>
         </view>
         
-        <view class="uni-flex-item" @click="goToUrl('mallOrder3')">
+        <view class="item" @click="goToUrl('mallOrder3')">
           <view class="">
             <image src="/static/icon/order_3.png" mode="" class="icon"></image>
           </view>
@@ -103,7 +125,7 @@
         </view>
       </view>
       <view class="uni-flex text-center user-item-card-icons">
-        <view class="uni-flex-item">
+        <view class="item">
           <view class="">
             <image src="/static/icon/profit_0.png" mode="" class="icon"></image>
           </view>
@@ -112,7 +134,7 @@
           </view>
         </view>
         
-        <view class="uni-flex-item" @click="goToUrl('mallProfit')">
+        <view class="item" @click="goToUrl('mallProfit')">
           <view class="">
             <image src="/static/icon/profit_1.png" mode="" class="icon"></image>
           </view>
@@ -121,7 +143,7 @@
           </view>
         </view>
         
-        <view class="uni-flex-item">
+        <view class="item">
           <view class="">
             <image src="/static/icon/profit_2.png" mode="" class="icon"></image>
           </view>
@@ -148,8 +170,8 @@
         </view>
       </view>
       
-      <view class="uni-flex text-center user-item-card-icons">
-        <view class="uni-flex-item" @click="goToUrl('mallCollect')">
+      <view class="uni-flex text-center user-item-card-icons flex-wrap">
+        <view class="item" @click="goToUrl('mallCollect')">
           <view class="">
             <image src="/static/icon/like.png" mode="" class="icon"></image>
           </view>
@@ -158,16 +180,17 @@
           </view>
         </view>
         
-        <view class="uni-flex-item" @click="goToUrl('mallAddress')">
+        <view class="item" @click="goToUrl('mallAddress')">
           <view class="">
             <image src="/static/icon/address.png" mode="" class="icon"></image>
           </view>
           <view class="">
             地址管理
           </view>
+          
         </view>
         
-        <view class="uni-flex-item">
+        <view class="item">
           <view class="">
             <image src="/static/icon/comment.png" mode="" class="icon"></image>
           </view>
@@ -176,54 +199,46 @@
           </view>
         </view>
         
-        <view class="uni-flex-item" @click="goToUrl('orderAfter')">
+        <view class="item" @click="goToUrl('orderAfter')">
           <view class="">
             <image src="/static/icon/order_after.png" mode="" class="icon"></image>
           </view>
           <view class="">
             售后
           </view>
+          
         </view>
         
-      </view>
-      
-      <view class="uni-flex text-center user-item-card-icons">
-        <view class="uni-flex-item">
+        <view class="item">
           <view class="">
             <image src="/static/icon/share.png" mode="" class="icon"></image>
           </view>
           <view class="">
             分享APP
           </view>
+          
         </view>
         
-        <view class="uni-flex-item">
+        <view class="item">
           <view class="">
             <image src="/static/icon/invite.png" mode="" class="icon"></image>
           </view>
           <view class="">
             我的推荐
           </view>
+          
         </view>
         
-        <view class="uni-flex-item">
-          <view class="">
-            
-          </view>
-          <view class="">
-            
-          </view>
+        <view class="item">
+         <view class="">
+           <image src="/static/icon/invoice.png" mode="" class="icon"></image>
+         </view>
+         <view class="">
+           发票开具
+         </view>
+          
         </view>
-        
-        <view class="uni-flex-item">
-          <view class="">
-            
-          </view>
-          <view class="">
-            
-          </view>
-        </view>
-        
+               
       </view>
       
     </view>
@@ -238,11 +253,23 @@
 
 <script>
   var wvUserIndex;
+  import {uniIcons} from '@dcloudio/uni-ui';
+  
   export default {
+    components:{
+      uniIcons
+    },
     data(){
       return {
         isLogin: false,
-        user: false
+        user: false,
+        navbar: {
+          opacity: 0
+        },
+        userData: {
+          avatar: '/static/icon/user_a.png',
+          username: '186****9410'
+        }
       }
     },
     methods:{
@@ -283,44 +310,70 @@
       // if (!token) {
       //   this.navToLogin()
       // }
+    },
+    onPageScroll(data) {
+      let scrollTop = data.scrollTop
+      if (scrollTop > 50) {
+        let num = scrollTop - 50
+        if (num <= 0) {
+          this.navbar.opacity = 0
+        } else {
+          num = num > 50 ? 50 : num
+          this.navbar.opacity = parseFloat((num / 50).toFixed(2))
+        }
+        
+      }else {
+        this.navbar.opacity = 0
+      }
+      // console.log(JSON.stringify(data))
+    },
+    onPullDownRefresh() {
+      
+      setTimeout(() => {
+        uni.stopPullDownRefresh()
+      },1000)
     }
   }
 </script>
 
 <style lang="less">
-  
-  .user-profile-title {
-    padding: 160rpx 40rpx;
-    background-image: linear-gradient(to bottom right, #1989fa, #3D6BFA);
+  .page-user-index {
+    min-height: 900px;
+    background: #fafafa;
     
-    .user-avatar {
-      width: 160rpx;
-      height: 160rpx;
-      border-radius: 160rpx;
-      background: #EEEEEE;
-    }
-    
-    .user-name {
-      line-height: 160rpx;
-      font-size: 40rpx;
-      font-weight: bold;
-    }
-    .user-setting-nav {
-      padding-top: 24px;
+    .user-index-header {
+      padding-top:var(--status-bar-height);
+      padding-bottom: 100rpx;
+      .user-index-header-content {
+        margin-top: 100rpx;
+        .user-index-avatar {
+          width: 120rpx;
+          height: 120rpx;
+          display: inline-block;
+          background: #FFFFFF;
+          border-radius: 120rpx;
+        }
+        
+        .user-index-name {
+          line-height: 60rpx;
+          font-size: 32rpx;
+          padding-left: 20rpx;
+        }
+      }
     }
   }
   
   .user-assets-box {
-    margin-left: 40rpx;
-    margin-right: 40rpx;
-    padding: 40rpx 0;
+    margin-left: 30rpx;
+    margin-right: 30rpx;
+    padding: 30rpx 0;
     background: #FFFFFF;
     border-radius: 16rpx;
     position: relative;
     top: -100rpx;
     
     .assets-num {
-      font-size: 40rpx;
+      font-size: 28rpx;
       font-weight: bold;
       
     }
@@ -329,7 +382,7 @@
     }
     
     .assets-title {
-      font-size: 26upx;
+      font-size: 24rpx;
       color:#C0C0C0 ;
       margin: 12rpx 24rpx;
       padding-top: 12rpx;
@@ -338,7 +391,7 @@
   }
   
   .user-item-card {
-    margin: 0 40rpx 40rpx; 
+    margin: 0 30rpx 30rpx; 
     background: #FFFFFF;
     border-radius: 16rpx;
     // border: 1rpx solid #3D6BFA;
@@ -347,7 +400,7 @@
       padding: 20rpx 30rpx ;
       border-bottom: 1rpx solid #F1F1F1;
       .title {
-        color: #3D6BFA;
+        color: #666666;
       }
       .nav {
         color: #C0C0C0;
@@ -355,10 +408,16 @@
     }
     
     .user-item-card-icons {
-      padding: 30rpx;
+      // padding: 30rpx;
+      padding-bottom: 30rpx;
       color: #999999;
-      font-size: 26rpx;
-      
+      font-size: 22rpx;
+      .item {
+        width: 25%;
+        margin-top: 30rpx;
+        // height: 160rpx;
+      }
+
       .icon {
         width: 64rpx;
         height: 64rpx;
