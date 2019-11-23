@@ -20,6 +20,8 @@ const config = {
 		orderAfter: isDev ? (devHost + '/order/after?from=appTab') : (prodHost + '/order/after?from=appTab'),
 		orderComment: isDev ? (devHost + '/order/comment?from=appTab') : (prodHost + '/order/comment?from=appTab'),
 		mallProfit: isDev ? (devHost + '/profit/list?from=appTab') : (prodHost + '/profit/list?from=appTab'),
+    userInvite: isDev ? (devHost + '/user/invite?from=appTab') : (prodHost + '/user/invite?from=appTab'),
+    userInviteList: isDev ? (devHost + '/user/invite?from=appTab&active=logs') : (prodHost + '/user/invite?from=appTab&active=logs'),
   }
 }
 

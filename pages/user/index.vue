@@ -34,6 +34,9 @@
            </view>
         </view>
         <view class="text-right">
+          <view class="user-qrcode-nav" @click="goToUrl('userInvite')">
+             <image src="/static/icon/qrcode.png" mode="" class="user-qrcode-nav"></image>
+          </view>
           
         </view>
       </view>
@@ -209,7 +212,7 @@
           
         </view>
         
-        <view class="item">
+        <view class="item" @click="goToUrl('userInvite')">
           <view class="">
             <image src="/static/icon/share.png" mode="" class="icon"></image>
           </view>
@@ -219,7 +222,7 @@
           
         </view>
         
-        <view class="item">
+        <view class="item" @click="goToUrl('userInviteList')">
           <view class="">
             <image src="/static/icon/invite.png" mode="" class="icon"></image>
           </view>
@@ -426,5 +429,12 @@
         height: 64rpx;
       }
     }
+ 
+  }
+  
+  .user-qrcode-nav {
+    width: 60rpx;
+    height: 60rpx;
+    display: inline-block;
   }
 </style>
