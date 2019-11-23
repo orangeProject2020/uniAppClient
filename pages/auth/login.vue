@@ -1,28 +1,28 @@
 <template>
   <view class="p-4">
-    <view class="text-5xl mt-16">
+    <view class="text-4xl mt-16 text-darker">
       SIGN IN
     </view>
-    <view class="bg-white p-4 rounded-lg mt-4">
+    <view class="bg-white rounded-lg mt-4">
       <view class="mb-4">
-        <view class="text-gray-500 text-lg">
-          Mobile
+        <view class="text-light">
+          Mobile / 手机
         </view>
         <view class="border-b p-2">
-          <input type="text" v-model="formData.mobile" class="text-lg text-bold" required />
+          <input type="text" v-model="formData.mobile" class=" text-bold" required />
         </view>
       </view>
 
       <view class="mb-4">
-        <view class="text-gray-500 text-lg">
-          Password
+        <view class="text-light ">
+          Password / 密码
         </view>
         <view class="border-b p-2">
-          <input type="text" v-model="formData.password" password="" class="text-lg text-bold" required />
+          <input type="text" v-model="formData.password" password="" class=" text-bold" required />
         </view>
       </view>
 
-      <view class="text-indigo-700 text-lg">
+      <view class="text-primary ">
         <view class="">
           <navigator url="/pages/auth/register">
             没有账号，去注册？
@@ -39,7 +39,7 @@
     </view>
 
     <view class="mt-8 text-center">
-      <view class="p-2 text-gray-600 text-sm">
+      <view class="p-2 text-dark text-xs">
         LOGIN
       </view>
       <button type="default" class="inline-block btn-login" :loading="isLoading" :disabled="isDisabled" @click="onLogin">
@@ -141,14 +141,16 @@
 
 <style>
   .btn-login {
-    border-radius: 9999upx;
+    border-radius: 9999rpx;
     border: none;
-    background: #4c51bf !important;
-    font-size: 24upx;
+    /* background: #4c51bf !important;
+     */
+    background: linear-gradient(to right bottom, #1989fa, #3D6BFA) !important;
+    font-size: 12px;
     color: #FFFFFF !important;
-    padding-top: 20upx;
-    padding-bottom: 20upx;
-    padding-left: 40upx;
-    padding-right: 40upx;
+    padding-top: 20rpx;
+    padding-bottom: 20rpx;
+    padding-left: 40rpx;
+    padding-right: 40rpx;
   }
 </style>

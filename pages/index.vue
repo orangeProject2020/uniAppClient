@@ -34,7 +34,13 @@
           <view class="swiper-banner-img bg-light">
             <image src="" mode="" class="swiper-banner-img"></image>
           </view>
-          
+        </view>
+      </swiper-item>
+      <swiper-item>
+        <view class="swiper-item">
+          <view class="swiper-banner-img bg-light">
+            <image src="" mode="" class="swiper-banner-img"></image>
+          </view>
         </view>
       </swiper-item>
     </swiper>
@@ -213,6 +219,11 @@
 </script>
 
 <style lang="less">
+  
+  .page-index {
+    padding-bottom: 200rpx;
+  }
+  
   .brand {
     color: #000;
     padding-left: 30rpx;
@@ -228,7 +239,7 @@
     .input-search {
       height: 60rpx;
       line-height: 60rpx;
-      color: #333;
+      color: #333333;
     }
   }
   
@@ -253,13 +264,13 @@
       padding: 20rpx 30rpx;
       line-height: 30rpx;
       .title {
-        color: #333;
+        color: #333333;
         font-weight: 400;
-        font-size: 30rpx;
+        font-size: 14px;
       }
       .more {
-        color: #666;
-        font-size: 24rpx;
+        color: #666666;
+        font-size: 12px;
       }
     }
     
@@ -280,11 +291,11 @@
             vertical-align: top;
             
             .title {
-              font-size: 26rpx;
-              color: #666;
+              font-size: 13px;
+              color: #666666;
             }
             .desc {
-              font-size: 24rpx;
+              font-size: 12px;
               color: #ccc;
             }
           }
@@ -313,7 +324,8 @@
         
       }
       .title {
-        color: #666;
+        color: #666666;
+        fonr-size:13px;
       }
     }
   }
@@ -332,7 +344,7 @@
       margin-top: 30rpx;
       .title {
         color: #666666;
-        font-size: 26rpx;
+        font-size: 13px;
       }
     }
     

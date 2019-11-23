@@ -68,11 +68,15 @@ body, html {
     vertical-align: top;
     font-weight: 600;
     padding-left: 20rpx;
-    font-size: 30rpx;
+    font-size: 15px;
   }
   
   .navbar-icon-right {
     margin-right: 30rpx;
+    
+    .icon {
+      padding-left: 20rpx;
+    }
   }
 }
 
@@ -146,27 +150,63 @@ uni-button:after {
 
 // 字体大小
 .text-xs {
-  font-size: 1rem;
+  font-size: 1-px;
 }
 
 .text-sm {
-  font-size: 1.2rem;
+  font-size: 12px;
 }
 
 .text-base {
-  font-size: 1.3rem;
+  font-size: 12px;
 }
 
 .text-lg {
-  font-size: 1.4rpx;
+  font-size: 14px;
 }
 
 .text-xl {
-  font-size: 1.6rpx;
+  font-size: 16px;
 }
 
+.text-2xl {
+  font-size: 20px;
+}
+
+.text-3xl {
+  font-size: 24px;
+}
+
+.text-4xl {
+  font-size: 32px;
+}
+ 
 .text-5xl {
-  font-size: 4rem;
+  font-size: 40px;
+}
+
+.text-primary {
+  color: @colorPrimary;
+}
+
+.text-primary-sub {
+  color: @colorPrimarySub;
+}
+
+.text-light {
+  color: #999999;
+}
+
+.text-lighter {
+  color: #CCCCCC;
+}
+
+.text-darker {
+  color: #333333;
+}
+
+.text-dark {
+  color: #666666;
 }
 
 // 背景
@@ -224,8 +264,6 @@ uni-button:after {
   margin-bottom: 40rpx;
 }
 
-
-
 .text-white {
   color: #FFFFFF;
 }
@@ -240,22 +278,6 @@ uni-button:after {
 
 .bg-white {
   background-color: #FFFFFF;
-}
-
-.text-gray-500 {
-  color: #a0aec0;
-}
-
-.text-gray-600 {
-  color: #718096;
-}
-
-.text-indigo-700 {
-  color: #4c51bf;
-}
-
-.bg-indigo-700 {
-  background-color: #4c51bf;
 }
 
 .inline-block  {

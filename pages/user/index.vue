@@ -14,8 +14,8 @@
         </view>
         <view class="navbar-item flex-item text-right">
           <view class="navbar-icon-right">
-             <uni-icons type="gear" size="30" color="#fff"></uni-icons>
-            <uni-icons type="email" size="30" color="#fff"></uni-icons>
+             <uni-icons type="gear" size="30" color="#fff" class="icon"></uni-icons>
+            <uni-icons type="email" size="30" color="#fff" class="icon"></uni-icons>
           </view>
         </view>
       </view>
@@ -338,8 +338,9 @@
 
 <style lang="less">
   .page-user-index {
-    min-height: 900px;
+  
     background: #fafafa;
+    padding-bottom: 400rpx;
     
     .user-index-header {
       padding-top:var(--status-bar-height);
@@ -356,7 +357,7 @@
         
         .user-index-name {
           line-height: 60rpx;
-          font-size: 32rpx;
+          font-size: 16px;
           padding-left: 20rpx;
         }
       }
@@ -373,7 +374,7 @@
     top: -100rpx;
     
     .assets-num {
-      font-size: 28rpx;
+      font-size: 14px;
       font-weight: bold;
       
     }
@@ -382,7 +383,7 @@
     }
     
     .assets-title {
-      font-size: 24rpx;
+      font-size: 12px;
       color:#C0C0C0 ;
       margin: 12rpx 24rpx;
       padding-top: 12rpx;
@@ -400,22 +401,24 @@
       padding: 20rpx 30rpx ;
       border-bottom: 1rpx solid #F1F1F1;
       .title {
-        color: #666666;
+        color: #333333;
+        font-size: 14px;
       }
       .nav {
-        color: #C0C0C0;
+        color: #666666;
       }
     }
     
     .user-item-card-icons {
       // padding: 30rpx;
       padding-bottom: 30rpx;
-      color: #999999;
-      font-size: 22rpx;
+      // color: #999999;
+      // font-size: 11px;
       .item {
         width: 25%;
         margin-top: 30rpx;
-        // height: 160rpx;
+        font-size: 12px;
+        color: #666666;
       }
 
       .icon {

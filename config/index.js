@@ -1,9 +1,9 @@
 const isDev = (process.env.NODE_ENV === 'development') ? true : false
 const devHost = 'http://127.0.0.1:10013'
-const prodHost = 'http://127.0.0.1:10013'
+const prodHost = 'http://mall.jianpiane.com'
 
 const config = {
-  apiDomain: isDev ? 'http://127.0.0.1:10000' : 'http://127.0.0.1:10000',
+  apiDomain: isDev ? 'http://127.0.0.1:10000' : 'http://api.jianpiane.com',
   channelId: '886',
   signKey: 'qsopifkhjjgjgfossfngnjgdsknkjlkljs',
   

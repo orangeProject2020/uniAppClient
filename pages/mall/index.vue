@@ -42,7 +42,13 @@
     },
     
     onLoad() {
-  
+      uni.showLoading({
+        title:'loading...',
+        mask:true
+      })
+      setTimeout(() => {
+        uni.hideLoading()
+      } , 2000)
     },
     onShow() {
       let lastToken = this.$store.state.lastToken || ''
@@ -58,3 +64,7 @@
     }
   };
 </script>
+
+<style>
+
+</style>
