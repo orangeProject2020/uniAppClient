@@ -322,13 +322,14 @@
     padding: 30rpx;
     
     .icon {
-      width: 120px;
+      margin-top: 20rpx;
+      width: 100px;
       display: inline-block;
-      height: 120px;
+      height: 100px;
     }
     
     .countdowm {
-
+      margin-top: 30rpx;
       .title {
         color: #666666;
         font-size: 26rpx;
