@@ -63,7 +63,8 @@
         isDisabled: false,
         formData: {
           mobile: '',
-          password: ''
+          password: '',
+          verify_code:''
         },
         passwordAgain:'',
         platform: '',
