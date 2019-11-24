@@ -8,13 +8,13 @@
           <view class="navbar-avatar navbar-left">
               <image :src="userData.avatar" mode="scaleToFill" class="navbar-avatar"></image>
           </view>
-          <view class="inline-block navbar-title">
-            {{ userData.username }}
+          <view class="inline-block navbar-title" @click="goToInfoPage">
+            {{ isLogin ? userData.username : '未登录' }}
           </view>
         </view>
         <view class="navbar-item flex-item text-right">
           <view class="navbar-icon-right">
-             <uni-icons type="gear" size="30" color="#fff" class="icon"></uni-icons>
+             <uni-icons type="gear" size="30" color="#fff" class="icon" @click="goToInfoPage"></uni-icons>
             <uni-icons type="email" size="30" color="#fff" class="icon"></uni-icons>
           </view>
         </view>
@@ -28,8 +28,8 @@
             <image :src="userData.avatar" mode="scaleToFill" class="user-index-avatar"></image>
           </view>
            <view class="inline-block vertical-top" style="">
-             <view class="text-white user-index-name">
-               {{userData.username}}
+             <view class="text-white user-index-name" @click="goToInfoPage">
+               {{ isLogin ? userData.username : '未登录' }}
              </view>
            </view>
         </view>
@@ -45,7 +45,7 @@
     <view class="uni-flex text-center user-assets-box">
       <view class="uni-flex-item">
         <view class="assets-num price">
-          ￥100.00
+          ￥{{(userAssets.balance / 100).toFixed(2)}}
         </view>
         <view class="assets-title">
           可提金额
@@ -53,7 +53,7 @@
       </view>
       <view class="uni-flex-item">
         <view class="assets-num price">
-          ￥100.00
+          ￥{{(userAssets.profit / 100).toFixed(2)}}
         </view>
         <view class="assets-title">
           预计分红 <uni-icons type="help" size="15" color="#999"></uni-icons>
@@ -61,7 +61,7 @@
       </view>
       <view class="uni-flex-item">
         <view class="assets-num">
-          2
+          {{userAssets.withdraw}}
         </view>
         <view class="assets-title">
           可用道具
@@ -265,13 +265,19 @@
     data(){
       return {
         isLogin: false,
+        lastLogin: false,
         user: false,
         navbar: {
           opacity: 0
         },
         userData: {
           avatar: '/static/icon/user_a.png',
-          username: '186****9410'
+          username: ''
+        },
+        userAssets: {
+          balance: 0,
+          profit: 0,
+          withdraw: 0
         }
       }
     },
@@ -294,22 +300,89 @@
           url:'/pages/user/wv?type=' + type
         })
       },
+      goToInfoPage() {
+        if (!this.isLogin){
+          this.navToLogin()
+          return true;
+        }
+        
+        uni.navigateTo({
+          url:'/pages/user/settings' 
+        })
+      },
       onLogout(){
         uni.setStorageSync('user_auth_token', '')
-        uni.switchTab({
-          url:'/pages/mall/index'
-        })
+        this.isLogin = false
+        this.lastLogin = false
+        this.userData.username = ''
+        this.userAssets.balance = 0
+        this.userAssets.profit = 0
+        this.userAssets.withdraw = 0
+        // uni.switchTab({
+        //   url:'/pages/mall/index'
+        // })
+      },
+      async getUserInfo() {
+        try {
+          let ret = await this.$store.dispatch('userInfoGet')
+          console.log('/getUserInfo ret:', JSON.stringify(ret, null, 2))
+          if (ret.code == 0){
+            this.userData.username = ret.data.username || ret.data.mobile
+            if (ret.data.avatar){
+              this.userData.avatar = ret.data.avatar
+            }    
+            let userId = ret.data.uuid
+            let assetsRet = await this.getUserAssets(userId)
+            if (assetsRet.code !== 0){
+              throw new Error('获取用户信息出现错误，请稍后重试')
+            }
+          } else {
+            throw new Error('获取用户信息失败，请稍后重试')
+          }
+        } catch (err) {
+          console.error('/getUserInfo err:' ,err.message)
+          uni.showToast({
+              title: err.message,
+              duration: 2000,
+              success() {
+                setTimeout(() => {
+                  uni.hideToast()
+                }, 2000)
+              }
+          });
+        }
+        
+      },
+      async getUserAssets(userId) {
+        let ret = await this.$store.dispatch('userAssetsGet', {user_id: userId})
+        console.log('/getUserAssets ret:', JSON.stringify(ret, null, 2))
+        if (ret.code == 0){
+          this.userAssets.balance = ret.data.balance
+          this.userAssets.profit = ret.data.profit
+          this.userAssets.withdraw = ret.data.withdraw
+        }
+        return ret
       }
     },
     onLoad() {
       let token = uni.getStorageSync('user_auth_token')
       this.isLogin = token ? true : false
+      this.lastLogin = this.isLogin ? true : false
+      
+      if (this.isLogin) {
+        this.getUserInfo()
+      }
     },
     onShow() {
       // uni.setStorageSync('user_auth_token', '')
       let token = uni.getStorageSync('user_auth_token')
       console.log('token:', token)
       this.isLogin = token ? true : false
+      
+      if (!this.lastLogin && this.isLogin){
+        this.getUserInfo()
+        this.lastLogin = true
+      }
       // if (!token) {
       //   this.navToLogin()
       // }
@@ -331,6 +404,10 @@
       // console.log(JSON.stringify(data))
     },
     onPullDownRefresh() {
+      
+      if (this.isLogin) {
+        this.getUserInfo()
+      }
       
       setTimeout(() => {
         uni.stopPullDownRefresh()

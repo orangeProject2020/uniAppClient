@@ -22,6 +22,7 @@
       this.url += '&token=' + token
       console.log('/onReady url:', this.url)
       let url = this.url
+      
       let createWV = (top) => {
         var currentWebview = this.$mp.page.$getAppWebview() //获取当前页面的webview对象
         setTimeout(function() {
@@ -36,14 +37,10 @@
       }
 
       // #ifdef APP-PLUS
-      uni.getSystemInfo({
-        success: (e) => {
-          let StatusBar = e.statusBarHeight;
-          console.log('StatusBar:', StatusBar)
-          createWV(StatusBar)
-        }
-      })
-
+      let e = uni.getSystemInfoSync()
+      let statusBar = e.statusBarHeight;
+      console.log('/onReady statusBar:', statusBar)
+      createWV(statusBar)
       // #endif
     },
 
