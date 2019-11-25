@@ -33,7 +33,7 @@
           // })
           console.log('/createWV url:', url)
           wvUser.loadURL(url)
-        }, 1000); //如果是页面初始化调用时，需要延时一下
+        }, 100); //如果是页面初始化调用时，需要延时一下
       }
 
       // #ifdef APP-PLUS
