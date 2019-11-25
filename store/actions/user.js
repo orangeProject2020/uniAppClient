@@ -7,6 +7,11 @@ export default {
     return ret
   },
   
+  async userInfoUpdate(store, data) {
+    let ret = await Request.post('/user/info/update', data)
+    return ret
+  },
+  
   async userAssetsGet(store , data = {}) {
     let ret = await Request.post('/mall/user/infoAssets' , data)
     return ret

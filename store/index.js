@@ -9,6 +9,15 @@ import ACTIONS from './actions/index'
 const store = new Vuex.Store({
     state: STATE,
     mutations: {
+      userInfoSet(state, data) {
+        state.userData = data
+      },
+      userAesstsSet(state, data) {
+        state.userAssets = data
+      },
+      lastLoginSet(state, data) {
+        state.lastLogin = data
+      }
     },
     actions: ACTIONS
 })

@@ -1,5 +1,5 @@
 
-import config from './../config/index.js';
+import config from './config.js';
 const apiDomain= config.apiDomain
 const channelId = config.channelId
 const signKey = config.signKey
@@ -15,11 +15,12 @@ class Request {
       url += '?token=' + token
     }
     let header = {}
-    header.uuid = 
+    header.uuid = uuidv4()
     header.timestamp = Date.now()
-    header.channel_id = channelId
+    // header.channel_id = channelId
     header['Content-Type'] = 'application/json'
     console.log('request apiDomain' , apiDomain)
+    data.channel_id = channelId
     
     let sign = this.signData(data, header).toLowerCase()
     console.log('request sign', sign)

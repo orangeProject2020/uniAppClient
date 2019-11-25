@@ -4,7 +4,7 @@
   </view>
 </template>
 <script>
-  import config from '@/config/index.js'
+  import config from '@/store/config.js';
   var wvUser; //计划创建的webview
 
   export default {
