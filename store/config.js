@@ -15,7 +15,7 @@ const config = {
     mallOrder1:  isDev ? (devHost + '/order/list?status=1&from=appTab') : (prodHost + '/order/list?status=1&from=appTab'),
     mallOrder2:  isDev ? (devHost + '/order/list?status=2&from=appTab') : (prodHost + '/order/list?status=2&from=appTab'),
     mallOrder3:  isDev ? (devHost + '/order/list?status=3&from=appTab') : (prodHost + '/order/list?status=3&from=appTab'),
-    mallAddress: isDev ? (devHost + '/user/address?from=appTab') : (prodHost + '/user/address?from=appTab'),
+    mallAddress: isDev ? (devHost + '/address/list?from=appTab') : (prodHost + '/address/list?from=appTab'),
 		mallCollect: isDev ? (devHost + '/user/collet?from=appTab') : (prodHost + '/user/collet?from=appTab'),
 		orderAfter: isDev ? (devHost + '/order/after?from=appTab') : (prodHost + '/order/after?from=appTab'),
 		orderComment: isDev ? (devHost + '/order/comment?from=appTab') : (prodHost + '/order/comment?from=appTab'),
