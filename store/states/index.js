@@ -10,5 +10,6 @@ export default {
     balance: 0,
     profit: 0,
     withdraw: 0
-  }
+  },
+  mallUrl:''
 }

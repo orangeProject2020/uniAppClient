@@ -26,7 +26,9 @@ const config = {
     userInviteList: isDev ? (devHost + '/user/invite?from=appTab&active=logs') : (prodHost + '/user/invite?from=appTab&active=logs'),
     aboutExtLink: isDev ? (devHost + '/about?from=appTab') : (prodHost + '/about?from=appTab'),
     protocolExtLink:isDev ? (devHost + '/protocol?from=appTab') : (prodHost + '/protocol?from=appTab')
-  }
+  },
+  
+  moneyImg: isDev ? ('http://127.0.0.1:10021/uploads/app/money.gif') : ('http://img.jianpiane.com/uploads/app/money.gif') 
 }
 
 

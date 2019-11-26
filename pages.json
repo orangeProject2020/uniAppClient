@@ -4,6 +4,7 @@
 			"path": "pages/index",
 			"style": {
 				"navigationBarTitleText": "首页",
+        "enablePullDownRefresh": true,
         "app-plus": {
             "titleNView": false //禁用原生导航栏
         }
@@ -22,8 +23,7 @@
     {
     	"path": "pages/user/settings",
     	"style": {
-    		"navigationBarTitleText": "设置",
-        "enablePullDownRefresh": true
+    		"navigationBarTitleText": "设置"
     	}
     },
     {

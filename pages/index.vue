@@ -29,17 +29,10 @@
     
     <swiper class="swiper-banner" :indicator-dots="swiper.indicatorDots" :autoplay="swiper.autoplay" :interval="swiper.interval"
       :duration="swiper.duration">
-      <swiper-item>
-        <view class="swiper-item">
+      <swiper-item v-for="item in indexData.banners" :key="item.id">
+        <view class="swiper-item" @click="indexClickItem(item)">
           <view class="swiper-banner-img bg-light">
-            <image src="" mode="" class="swiper-banner-img"></image>
-          </view>
-        </view>
-      </swiper-item>
-      <swiper-item>
-        <view class="swiper-item">
-          <view class="swiper-banner-img bg-light">
-            <image src="" mode="" class="swiper-banner-img"></image>
+            <image :src="item.cover" mode="" class="swiper-banner-img"></image>
           </view>
         </view>
       </swiper-item>
@@ -50,48 +43,23 @@
     <view class="index-section">
       <view class="flex ">
         <view class="flex flex-item flex-wrap index-section-cate-nav text-center">
-          <view class="item">
+          <view class="item" v-for="item in indexData.categorys" :key="item.id" @click="indexClickItem(item)">
             <view class="cover bg-light">
-              
+              <image :src="item.cover" mode="" class="cover"></image>
             </view>
-            <view class="title">
-              套餐区
-            </view>
-            
+         
           </view>
-          <view class="item">
-            <view class="cover bg-light">
-              
-            </view>
-            <view class="title">
-              分类1
-            </view>
-          </view>
-          <view class="item">
-            <view class="cover bg-light">
-            </view>
-            <view class="title">
-              分类2
-            </view>
-          </view>
-          <view class="item">
-            <view class="cover bg-light">
-              
-            </view>
-            <view class="title">
-              分类3
-            </view>
-          </view>
+
         </view>
         <view class="flex-item text-center index-profit">
           <view class="icon">
-            <image src="/static/icon/rmb.png" mode="" class="icon"></image>
+            <image :src="moneyImg" mode="" class="icon"></image>
           </view>
-          <view class="countdowm">
+          <view class="countdowm" v-if="countdownData">
             <view class="title">
               分红倒计时
             </view>
-            <uni-countdown color="#666666" background-color="" border-color="#" :day="1" :hour="1" :minute="12" :second="40"></uni-countdown>
+            <uni-countdown color="#666666" background-color="" border-color="#" :show-day="false" :hour="countdownData.h" :minute="countdownData.m" :second="countdownData.s"></uni-countdown>
           </view>
         </view>
       </view>
@@ -111,24 +79,9 @@
        
        <view class="index-section-content">
          <scroll-view class="index-section-content-box" scroll-x="true" scroll-left="0">
-             <view class="item" >
+             <view class="item" v-for="item in indexData.packages" :key="item.id" @click="indexClickItem(item)">
                <view class="index-package-img bg-light">
-                 <image src="" mode="" class="index-package-img "></image>
-               </view>
-             </view>
-             <view class="item" >
-               <view class="index-package-img bg-light">
-                 <image src="" mode="" class="index-package-img"></image>
-               </view>
-             </view>
-             <view class="item" >
-               <view class="index-package-img bg-light">
-                 <image src="" mode="" class="index-package-img"></image>
-               </view>
-             </view>
-             <view class="item" >
-               <view class="index-package-img bg-light">
-                 <image src="" mode="" class="index-package-img"></image>
+                 <image :src="item.cover" mode="" class="index-package-img "></image>
                </view>
              </view>
 
@@ -150,41 +103,18 @@
        
        <view class="index-section-content">
          <scroll-view class="index-section-content-box" scroll-x="true" scroll-left="0">
-             <view class="item" >
+             <view class="item" v-for="item in indexData.recommends" :key="item.id" @click="indexClickItem(item)">
                <view class="index-package-img bg-light">
-                 <image src="" mode="" class="index-package-img "></image>
+                 <image :src="item.cover" mode="" class="index-package-img "></image>
                </view>
                <view class="title truncate">
-                 推荐产品1
+                  {{item.title}}
                </view>
                <view class="desc truncate">
-                 描述xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+                 {{ item.desc}}
                </view>
              </view>
-             <view class="item" >
-               <view class="index-package-img bg-light">
-                 <image src="" mode="" class="index-package-img "></image>
-               </view>
-               <view class="title truncate">
-                 推荐产品2
-               </view>
-               <view class="desc truncate">
-                 描述
-               </view>
-             </view>
-             
-             <view class="item" >
-               <view class="index-package-img bg-light">
-                 <image src="" mode="" class="index-package-img "></image>
-               </view>
-               <view class="title truncate">
-                 推荐产品3
-               </view>
-               <view class="desc truncate">
-                 描述
-               </view>
-             </view>
-    
+ 
          </scroll-view>
        </view>
         
@@ -196,6 +126,7 @@
 
 <script>
   import {uniIcons,uniNoticeBar,uniCountdown} from '@dcloudio/uni-ui';
+  import config from '@/store/config.js'
   export default {
     components:{
       uniIcons,
@@ -213,7 +144,99 @@
           interval: 2000,
           duration: 500
         },
+        indexData:{
+          banners:[],
+          categorys:[],
+          packages:[],
+          recommends:[]
+        },
+        moneyImg: config.moneyImg,
+        countdownData: null
       }
+    },
+    computed:{
+      
+    },
+    methods:{
+      async getIndexData(type = 'banners') {
+        let datas = uni.getStorageSync('index_data_' + type)
+        if (!datas || datas.length <= 0) {
+          console.log('/getIndexData ' , type, ' from api')
+          await this.$store.dispatch('indexDataGet', {type: type})
+          datas = uni.getStorageSync('index_data_' + type)
+        } else {
+          console.log('/getIndexData ' , type, ' from storage')
+        }
+        this.indexData[type] = datas ? JSON.parse(datas) : []
+      },
+      indexClickItem(item) {
+        let type = item.type
+        console.log('/indexClickItem type:' , type , item.link)
+        if (type == 'url') {
+          uni.navigateTo({
+            url: '/pages/extLink?url=' + encodeURIComponent(item.link)
+          })
+        } else if (type == 'page') {
+          uni.navigateTo({
+            url:item.link,
+            success() {
+              console.log('/go to page success:' , item.link)
+            },
+            fail() {
+              console.log('/go to page fail:' , item.link)
+              uni.switchTab({
+                url:item.link
+              })
+            }
+          })
+        } else if (type == 'pageMall') {
+          this.$store.state.mallUrl = item.link
+          uni.switchTab({
+            url:'/pages/mall/index'
+          })
+        }
+      },
+      async getCountDown() {
+        let countdownRet = await this.$store.dispatch('countdownGet')
+        if (countdownRet.code === 0) {
+          let countdownData = countdownRet.data
+          console.log('/onLoad countdownData:', JSON.stringify(countdownData))
+          this.countdownData = countdownData
+        }
+        
+      }
+      
+    },
+    async onLoad() {
+      // this.getBanners()
+      // this.getCategorys()
+      this.getIndexData('banners')
+      this.getIndexData('categorys')
+      this.getIndexData('packages')
+      this.getIndexData('recommends')
+ 
+      this.getCountDown()
+  
+    },
+    onPullDownRefresh() {
+      let p1 = this.$store.dispatch('indexDataGet', {type: 'banners'}).then(() => {
+        this.getIndexData('banners')
+      })
+      let p2 = this.$store.dispatch('indexDataGet', {type: 'categorys'}).then(() => {
+        this.getIndexData('banners')
+      })
+      let p3 = this.$store.dispatch('indexDataGet', {type: 'packages'}).then(() => {
+        this.getIndexData('packages')
+      })
+      let p4 = this.$store.dispatch('indexDataGet', {type: 'recommends'}).then(() => {
+        this.getIndexData('recommends')
+      })
+      
+      Promise.all([p1,p2,p3,p4]).then(() => {
+        uni.stopPullDownRefresh()
+      })
+      
+      this.getCountDown()
     }
   }
 </script>
@@ -310,18 +333,17 @@
   }
   
   .index-section-cate-nav {
-    padding: 0 30rpx 30rpx;
+    padding: 30rpx;
     border-right: 1rpx solid #EEEEEE;
     .item {
       width: 50%;
-      margin-top: 30rpx;
+      margin-bottom: 20rpx;
       
       .cover {
-        border-radius: 9999px;
+        border-radius: 8rpx;
         width: 140rpx;
         height: 140rpx;
         display: inline-block;
-        
       }
       .title {
         color: #666666;
@@ -331,17 +353,15 @@
   }
   
   .index-profit {
-    padding: 30rpx;
-    
+    padding-top:30rpx;
     .icon {
-      margin-top: 20rpx;
       width: 100px;
       display: inline-block;
       height: 100px;
     }
     
     .countdowm {
-      margin-top: 30rpx;
+      margin-top: 20rpx;
       .title {
         color: #666666;
         font-size: 13px;
