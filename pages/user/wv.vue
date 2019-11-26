@@ -22,8 +22,12 @@
       this.url += '&token=' + token
       console.log('/onReady url:', this.url)
       let url = this.url
-      
+      uni.showLoading({
+        title:'loading...',
+        mask:true
+      })
       let createWV = (top) => {
+        
         var currentWebview = this.$mp.page.$getAppWebview() //获取当前页面的webview对象
         setTimeout(function() {
           wvUser = currentWebview.children()[0]
@@ -33,7 +37,8 @@
           // })
           console.log('/createWV url:', url)
           wvUser.loadURL(url)
-        }, 100); //如果是页面初始化调用时，需要延时一下
+          uni.hideLoading()
+        }, 1000); //如果是页面初始化调用时，需要延时一下
       }
 
       // #ifdef APP-PLUS

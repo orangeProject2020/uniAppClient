@@ -24,6 +24,8 @@ const config = {
     mallWithdrawList: isDev ? (devHost + '/user/withdraw?from=appTab&status=1') : (prodHost + '/user/withdraw?from=appTab&status=1'),
     userInvite: isDev ? (devHost + '/user/invite?from=appTab') : (prodHost + '/user/invite?from=appTab'),
     userInviteList: isDev ? (devHost + '/user/invite?from=appTab&active=logs') : (prodHost + '/user/invite?from=appTab&active=logs'),
+    aboutExtLink: isDev ? (devHost + '/about?from=appTab') : (prodHost + '/about?from=appTab'),
+    protocolExtLink:isDev ? (devHost + '/protocol?from=appTab') : (prodHost + '/protocol?from=appTab')
   }
 }
 

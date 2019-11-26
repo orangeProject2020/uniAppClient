@@ -393,8 +393,11 @@
           }
         } catch (err) {
           console.error('/getUserInfo err:', err.message)
+          uni.setStorageSync('user_auth_token', '')
+          this.isLogin = false
           uni.showToast({
             title: err.message,
+            icon:'none',
             duration: 2000,
             success() {
               setTimeout(() => {

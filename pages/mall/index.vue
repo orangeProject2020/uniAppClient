@@ -19,7 +19,7 @@
         let currentWebview = this.$mp.page.$getAppWebview() //获取当前页面的webview对象
         console.log('/createWV currentWebview', currentWebview)
         return new Promise((r,j) => {
-          setTimeout(function() {
+          setTimeout(() => {
             wvIndex = currentWebview.children()[0]
             wvIndex.setStyle({
               top: top,
@@ -62,7 +62,9 @@
           let statusBar = e.statusBarHeight;
           console.log('/onLoad statusBar:', statusBar)
           await this.createWV(statusBar , url)
-          uni.hideLoading()
+          setTimeout(() => {
+            uni.hideLoading()
+          } , 1500)
       }
       
     },
@@ -84,7 +86,10 @@
         let statusBar = e.statusBarHeight;
         console.log('/onLoad statusBar:', statusBar)
         await this.createWV(statusBar , url)
-        uni.hideLoading()
+        setTimeout(() => {
+          uni.hideLoading()
+        } , 1500)
+        
       }
     }
   };

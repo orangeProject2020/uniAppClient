@@ -35,8 +35,12 @@
         }
     	}
     },
-    
-    
+    {
+    	"path": "pages/extLink",
+    	"style": {
+    		"navigationBarTitleText": ""
+    	}
+    },
     {
     	"path": "pages/cart/index",
     	"style": {
