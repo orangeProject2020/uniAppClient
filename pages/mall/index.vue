@@ -18,19 +18,21 @@
       createWV(top, url) {
         let currentWebview = this.$mp.page.$getAppWebview() //获取当前页面的webview对象
         console.log('/createWV currentWebview', currentWebview)
-        return new Promise((r, j) => {
-          setTimeout(() => {
-            wvIndex = currentWebview.children()[0]
-            wvIndex.setStyle({
-              top: top,
-              bottom: 0
-            })
-            console.log('/createWV wvIndex', wvIndex)
-            wvIndex.loadURL(url)
-            r(wvIndex)
-            // 
-          }, 500); //如果是页面初始化调用时，需要延时一下
-        })
+				if (!wvIndex) {
+					setTimeout(() => {
+					  wvIndex = currentWebview.children()[0]
+					  wvIndex.setStyle({
+					    top: top,
+					    bottom: 0
+					  })
+					  console.log('/createWV wvIndex', wvIndex)
+					  wvIndex.loadURL(url)
+					  // 
+					}, 500); //如果是页面初始化调用时，需要延时一下
+				}else {
+					wvIndex.loadURL(url)
+				}
+
       },
       showBg() {
         this.display = 'block'
@@ -67,7 +69,7 @@
         let e = uni.getSystemInfoSync()
         let statusBar = e.statusBarHeight;
         console.log('/onLoad statusBar:', statusBar)
-        await this.createWV(statusBar, url)
+        this.createWV(statusBar, url)
         setTimeout(() => {
           uni.hideLoading()
         }, 1500)
@@ -101,7 +103,7 @@
         let e = uni.getSystemInfoSync()
         let statusBar = e.statusBarHeight;
         console.log('/onShow statusBar:', statusBar)
-        await this.createWV(statusBar, url)
+        this.createWV(statusBar, url)
         setTimeout(() => {
           uni.hideLoading()
         }, 1500)
