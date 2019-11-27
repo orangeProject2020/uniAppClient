@@ -1,18 +1,23 @@
 <template>
   <view>
-    <web-view></web-view>
+    <web-view :webview-styles="webviewStyles"></web-view>
   </view>
   </view>
 </template>
 <script>
   import config from '@/store/config.js';
-
+	var wv;
   export default {
     data() {
       return {
         url: '',
         mallIndexUrl: config.urls.mallIndex,
-        wv: null
+        wv: null,
+				webviewStyles: {
+						progress: {
+								color: '#3D6BFA'
+						}
+				}
       }
     },
     methods: {
@@ -42,19 +47,22 @@
       let e = uni.getSystemInfoSync()
       let statusBar = e.statusBarHeight;
       console.log('/onReady currentWebview:' , currentWebview)
-      if (!this.wv) {
-        setTimeout(() => {
-          this.wv = currentWebview.children()[0]
-          this.wv.setStyle({top: statusBar, bottom:0})
-          this.wv.loadURL(this.url)
-        }, 500)
-      }
+			
+      setTimeout(() => {
+        wv = currentWebview.children()[0]
+        wv.setStyle({top: statusBar, bottom:0})
+        wv.loadURL(this.url)
+      	// this.wv = wv
+				uni.hideLoading()
+      }, 100)
       
-      this.wv.loadURL(this.url)
     },
 
     async onLoad(opt) {
       // let url = decodeURIComponent(opt.url)
+			uni.showLoading({
+				title:'loading...'
+			})
       console.log('/onLoad url:', opt.url)
       let url = opt.url
       let token = uni.getStorageSync('user_auth_token') || ''
@@ -91,6 +99,7 @@
 
     },
     async onShow() {
+			console.log('/onShow .....')
     }
   };
 </script>
