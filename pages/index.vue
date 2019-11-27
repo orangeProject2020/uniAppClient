@@ -177,22 +177,26 @@
             url: '/pages/extLink?url=' + encodeURIComponent(item.link)
           })
         } else if (type == 'page') {
+          
           uni.navigateTo({
-            url:item.link,
+            url:'/pages' + item.link,
             success() {
               console.log('/go to page success:' , item.link)
             },
             fail() {
               console.log('/go to page fail:' , item.link)
+              let linkData = item.link.split('?')
+              console.log('/go to page tab:' , linkData[0], linkData[1])
+              uni.setStorageSync('index_jump_data', linkData[1])
               uni.switchTab({
-                url:item.link
+                url:'/pages' + linkData[0]
               })
             }
           })
         } else if (type == 'pageMall') {
-          this.$store.state.mallUrl = item.link
-          uni.switchTab({
-            url:'/pages/mall/index'
+          
+          uni.navigateTo({
+            url:'/pages/mall/wv?url=' + encodeURIComponent(item.link)
           })
         }
       },
@@ -246,25 +250,7 @@
   .page-index {
     padding-bottom: 200rpx;
   }
-  
-  .brand {
-    color: #000;
-    padding-left: 30rpx;
-    font-weight: bold;
-    font-size: 30rpx;
-    width: 180rpx;
-  }
-  
-  .search {
-    padding: 0 20rpx;
-    border-radius: 40rpx;
-    width: 400rpx;
-    .input-search {
-      height: 60rpx;
-      line-height: 60rpx;
-      color: #333333;
-    }
-  }
+
   
   .swiper-banner {
     height: 450rpx ;
@@ -277,7 +263,6 @@
         border-radius: 16rpx;
         width: 690rpx;
         height: 360rpx;
-        margin-top: ;
       }
     }
   }

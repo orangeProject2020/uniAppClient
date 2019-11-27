@@ -258,7 +258,7 @@
   import {
     uniIcons
   } from '@dcloudio/uni-ui';
-
+  import config from '@/store/config.js';
   export default {
     components: {
       uniIcons
@@ -327,10 +327,17 @@
           });
           return 
         }
-
-        uni.navigateTo({
-          url: '/pages/user/wv?type=' + type
-        })
+        
+        let mallLink= config.mallLinks[type] || ''
+        console.log('/goToUrl mallLink:', mallLink)
+        if (mallLink) {
+          uni.navigateTo({
+            url: '/pages/mall/wv?url=' + encodeURIComponent(mallLink)
+          })
+        }
+        // uni.navigateTo({
+        //   url: '/pages/user/wv?type=' + type
+        // })
       },
       goToInfoPage() {
         if (!this.isLogin) {

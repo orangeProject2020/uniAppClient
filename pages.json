@@ -11,6 +11,16 @@
 			}
 		},
     {
+    	"path": "pages/mall/index",
+    	"style": {
+    		"navigationBarTitleText": "商城",
+        "enablePullDownRefresh": true,
+        "app-plus": {
+            "titleNView": false //禁用原生导航栏
+        }
+    	}
+    },
+    {
     	"path": "pages/user/index",
     	"style": {
     		"navigationBarTitleText": "个人中心",
@@ -27,9 +37,9 @@
     	}
     },
     {
-    	"path": "pages/mall/index",
+    	"path": "pages/mall/wv",
     	"style": {
-    		"navigationBarTitleText": "商城",
+    		"navigationBarTitleText": "",
         "app-plus": {
             "titleNView": false //禁用原生导航栏
         }

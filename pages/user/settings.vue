@@ -49,10 +49,6 @@
       </view>
     </view>
 
-    
-
-    
-
     <view class="flex p-3 border-b">
       <view class="flex-item">
         <view class="setting-title">
@@ -152,8 +148,8 @@
         //   username: '',
         //   alipay: ''
         // },
-        aboutLink: config.urls.aboutExtLink,
-        protocol: config.urls.protocolExtLink
+        aboutLink: config.mallLinks.aboutExtLink,
+        protocol: config.mallLinks.protocolExtLink
       }
     },
     computed: {
@@ -190,7 +186,7 @@
       goToExtLink(url){
         console.log('goToExtLink:',url)
         uni.navigateTo({
-          url: '/pages/extLink?url=' + encodeURIComponent(url)
+          url: '/pages/mall/wv?url=' + encodeURIComponent(url)
         })
       },
       async checkUpdate() {
