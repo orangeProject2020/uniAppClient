@@ -7,7 +7,7 @@ import md5 from 'js-md5';
 import uuidv4 from 'uuid/v4';
 
 class Request {
-
+	
   async post(url, data = {}, query = {}) {
 
     let token = uni.getStorageSync('user_auth_token') || '';
@@ -124,6 +124,22 @@ class Request {
     })
     
   }
+	
+	get(url) {
+		return new Promise((r,j) => {
+			uni.request({
+				url: apiDomain + url,
+				method: 'GET',
+				success: (res) => {
+					r(res.data)
+				},
+				fail: (err) => {
+					console.log(err)
+					j(null)
+				}
+			})
+		})
+	}
 }
 
 export default new Request

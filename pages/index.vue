@@ -32,7 +32,7 @@
       <swiper-item v-for="item in indexData.banners" :key="item.id">
         <view class="swiper-item" @click="indexClickItem(item)">
           <view class="swiper-banner-img bg-light">
-            <image :src="item.cover" mode="" class="swiper-banner-img"></image>
+            <image :src="item.cover" :lazy-load="true" mode="" class="swiper-banner-img"></image>
           </view>
         </view>
       </swiper-item>
@@ -45,7 +45,7 @@
         <view class="flex flex-item flex-wrap index-section-cate-nav text-center">
           <view class="item" v-for="item in indexData.categorys" :key="item.id" @click="indexClickItem(item)">
             <view class="cover bg-light">
-              <image :src="item.cover" mode="" class="cover"></image>
+              <image :src="item.cover" :lazy-load="true" mode="" class="cover"></image>
             </view>
          
           </view>
@@ -53,7 +53,7 @@
         </view>
         <view class="flex-item text-center index-profit">
           <view class="icon">
-            <image :src="moneyImg" mode="" class="icon"></image>
+            <image :src="moneyImg" :lazy-load="true" mode="" class="icon"></image>
           </view>
           <view class="countdowm" v-if="countdownData">
             <view class="title">
@@ -81,7 +81,7 @@
          <scroll-view class="index-section-content-box" scroll-x="true" scroll-left="0">
              <view class="item" v-for="item in indexData.packages" :key="item.id" @click="indexClickItem(item)">
                <view class="index-package-img bg-light">
-                 <image :src="item.cover" mode="" class="index-package-img "></image>
+                 <image :src="item.cover" :lazy-load="true" mode="" class="index-package-img "></image>
                </view>
              </view>
 
@@ -105,7 +105,7 @@
          <scroll-view class="index-section-content-box" scroll-x="true" scroll-left="0">
              <view class="item" v-for="item in indexData.recommends" :key="item.id" @click="indexClickItem(item)">
                <view class="index-package-img bg-light">
-                 <image :src="item.cover" mode="" class="index-package-img "></image>
+                 <image :src="item.cover" :lazy-load="true" mode="" class="index-package-img "></image>
                </view>
                <view class="title truncate">
                   {{item.title}}
@@ -126,7 +126,8 @@
 
 <script>
   import {uniIcons,uniNoticeBar,uniCountdown} from '@dcloudio/uni-ui';
-  import config from '@/store/config.js'
+  import config from '@/store/config.js';
+	import utils from '@/store/utils.js';
   export default {
     components:{
       uniIcons,
@@ -201,12 +202,30 @@
         }
       },
       async getCountDown() {
-        let countdownRet = await this.$store.dispatch('countdownGet')
-        if (countdownRet.code === 0) {
-          let countdownData = countdownRet.data
-          console.log('/onLoad countdownData:', JSON.stringify(countdownData))
-          this.countdownData = countdownData
-        }
+        // let countdownRet = await this.$store.dispatch('countdownGet')
+        // if (countdownRet.code === 0) {
+        //   let countdownData = countdownRet.data
+        //   console.log('/onLoad countdownData:', JSON.stringify(countdownData))
+        //   this.countdownData = countdownData
+        // }
+				let currentTimestamp = Date.now() + this.$store.state.timestampVal
+				console.log('/getCountDown currentTimestamp:',currentTimestamp)
+				let today = utils.dateFormat(null, 'YYYY-MM-DD')
+				console.log('/getCountDown today:',today)
+				let todayEnd = utils.getTimestamp(today + 'T23:59:59Z')
+				console.log('/getCountDown todayEnd:',todayEnd)
+				let second = todayEnd - parseInt(currentTimestamp / 1000)
+				console.log('/getCountDown second:',second)
+				let h = parseInt(second / 3600)
+				let m = parseInt((second - h * 3600) / 60)
+				let s = second - h * 3600 - m * 60
+				
+				this.countdownData = {
+					h:h - 8,
+					m:m,
+					s:s
+				}
+				console.log('/getCountDown countdownData:',this.countdownData)
         
       }
       
@@ -219,9 +238,13 @@
       this.getIndexData('packages')
       this.getIndexData('recommends')
  
-      this.getCountDown()
-  
+			
     },
+		onShow() {
+			
+			this.getCountDown()
+			
+		},
     onPullDownRefresh() {
       let p1 = this.$store.dispatch('indexDataGet', {type: 'banners'}).then(() => {
         this.getIndexData('banners')

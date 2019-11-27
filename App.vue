@@ -35,6 +35,13 @@
         console.error(err);
       }
       
+			
+			let timestampApi = await this.$store.dispatch('indexTimestampGet')
+			console.log('/onLoad timestampApi:', timestampApi)
+			let now = Date.now()
+			let timestampVal = timestampApi - now
+			console.log('/onLoad timestampVal:', timestampVal)
+			this.$store.state.timestampVal = timestampVal
       
 		},
 		onShow: function() {

@@ -31,7 +31,7 @@
       <swiper-item v-for="item in banners" :key="item.id">
         <view class="swiper-item" @click="bannerItemClick(item)">
           <view class="swiper-banner-img bg-light">
-            <image :src="item.cover" mode="" class="swiper-banner-img"></image>
+            <image :src="item.cover" :lazy-load="true" mode="" class="swiper-banner-img"></image>
           </view>
         </view>
       </swiper-item>
@@ -57,7 +57,7 @@
         </view>
         <view class="goods-item text-center" v-for="item in goodsList" :key="item.id" @click="goToDetail(item)">
           <view class="cover">
-            <image :src="item.cover" mode="" class="cover"></image>
+            <image :src="item.cover" :lazy-load="true" mode="" class="cover"></image>
           </view>
           <view class="title truncate">
             {{ item.title }}
