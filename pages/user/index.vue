@@ -506,6 +506,7 @@
     .user-index-header {
       padding-top: var(--status-bar-height);
       padding-bottom: 100rpx;
+      margin-top: -2rpx;
 
       .user-index-header-content {
         margin-top: 100rpx;

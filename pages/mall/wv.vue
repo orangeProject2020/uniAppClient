@@ -53,7 +53,10 @@
         wv.setStyle({top: statusBar, bottom:0})
         wv.loadURL(this.url)
       	// this.wv = wv
-				uni.hideLoading()
+        setTimeout(() => {
+          uni.hideLoading()
+        }, 1000);
+				
       }, 100)
       
     },

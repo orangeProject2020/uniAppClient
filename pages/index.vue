@@ -100,8 +100,8 @@
       
       <view class="index-section-content">
         <view class="flex flex-wrap index-section-content-list">
-          <view class="index-section-content-list-item" v-for="item in indexData.males" :key="item.id">
-            <image :src="item.cover" mode="" class="cover"></image>
+          <view class="index-section-content-list-item" v-for="item in indexData.males" :key="item.id" @click="indexClickItem(item)">
+            <image :src="item.cover" :lazy-load="true" mode="" class="cover"></image>
           </view>
           
         </view>
@@ -120,8 +120,8 @@
       
       <view class="index-section-content">
         <view class="flex flex-wrap index-section-content-list">
-          <view class="index-section-content-list-item" v-for="item in indexData.females" :key="item.id">
-            <image :src="item.cover" mode="" class="cover"></image>
+          <view class="index-section-content-list-item" v-for="item in indexData.females" :key="item.id" @click="indexClickItem(item)">
+            <image :src="item.cover" :lazy-load="true" mode="" class="cover"></image>
           </view>
           
         </view>
