@@ -13,11 +13,9 @@
               <uni-icons type="search" size="15"></uni-icons>
             </view>
             <view class="">
-               <input type="text" value="" placeholder="搜索" class="input-search"/>
+               <input type="text" value="" placeholder="搜索" class="input-search" @click="goToMallUrl('/list')"/>
             </view>
- 
-          </view>
-          
+          </view>        
         </view>
         <view class="navbar-item text-right flex-item">
           <view class="navbar-icon-right">
@@ -41,7 +39,7 @@
     <uni-notice-bar scrollable="true" show-icon="true" single="true" text="消息通知xxxxxxxxxxxxxxxxxxxxxxx" show-close="true" style="padding: 20rpx 30rpx;"></uni-notice-bar>
     
     <view class="index-section">
-      <view class="flex ">
+      <view class="flex " style="border-top: 1rpx solid #EEEEEE;">
         <view class="flex flex-item flex-wrap index-section-cate-nav text-center">
           <view class="item" v-for="item in indexData.categorys" :key="item.id" @click="indexClickItem(item)">
             <view class="cover bg-light">
@@ -72,7 +70,7 @@
          <view class="title flex-item">
            特惠套餐
          </view>
-         <view class="more flex-item text-right">
+         <view class="more flex-item text-right" @click="goToMallUrl('/list?category=package')">
            更多 <uni-icons type="arrowright" size="12" color="#999"></uni-icons>
          </view>
        </view>
@@ -90,13 +88,53 @@
         
     </view>
     
+    <view class="index-section">
+      <view class="index-section-head flex">
+        <view class="title flex-item">
+          快乐男孩 / Happy Boys
+        </view>
+        <view class="more flex-item text-right" @click="goToMallUrl('/list?typeSub=1')">
+          更多 <uni-icons type="arrowright" size="12" color="#999"></uni-icons>
+        </view>
+      </view>
+      
+      <view class="index-section-content">
+        <view class="flex flex-wrap index-section-content-list">
+          <view class="index-section-content-list-item" v-for="item in indexData.males" :key="item.id">
+            <image :src="item.cover" mode="" class="cover"></image>
+          </view>
+          
+        </view>
+      </view>
+    </view>
+    
+    <view class="index-section">
+      <view class="index-section-head flex">
+        <view class="title flex-item">
+          糖果女孩 / Candy Girls
+        </view>
+        <view class="more flex-item text-right" @click="goToMallUrl('/list?typeSub=2')">
+          更多 <uni-icons type="arrowright" size="12" color="#999"></uni-icons>
+        </view>
+      </view>
+      
+      <view class="index-section-content">
+        <view class="flex flex-wrap index-section-content-list">
+          <view class="index-section-content-list-item" v-for="item in indexData.females" :key="item.id">
+            <image :src="item.cover" mode="" class="cover"></image>
+          </view>
+          
+        </view>
+      </view>
+    </view>
+    
     
     <view class="index-section ">
        <view class="index-section-head flex">
          <view class="title flex-item">
            为你推荐
          </view>
-         <view class="more flex-item text-right">
+         <view class="more flex-item text-right" @click="goToMallUrl('/list?category=recommend')">
            更多 <uni-icons type="arrowright" size="12" color="#999"></uni-icons>
          </view>
        </view>
@@ -149,7 +187,9 @@
           banners:[],
           categorys:[],
           packages:[],
-          recommends:[]
+          recommends:[],
+          males:[],
+          females:[]
         },
         moneyImg: config.moneyImg,
         countdownData: null
@@ -227,7 +267,14 @@
 				}
 				console.log('/getCountDown countdownData:',this.countdownData)
         
-      }
+      },
+      goToMallUrl(url) {
+        url = encodeURIComponent(url)
+        console.log('/goToMallUrl url:' , url)
+        uni.navigateTo({
+          url:'/pages/mall/wv?url=' + encodeURIComponent(url)
+        })
+      },
       
     },
     async onLoad() {
@@ -237,20 +284,19 @@
       this.getIndexData('categorys')
       this.getIndexData('packages')
       this.getIndexData('recommends')
- 
-			
+      this.getIndexData('males')
+      this.getIndexData('females')
+
     },
 		onShow() {
-			
 			this.getCountDown()
-			
 		},
     onPullDownRefresh() {
       let p1 = this.$store.dispatch('indexDataGet', {type: 'banners'}).then(() => {
         this.getIndexData('banners')
       })
       let p2 = this.$store.dispatch('indexDataGet', {type: 'categorys'}).then(() => {
-        this.getIndexData('banners')
+        this.getIndexData('categorys')
       })
       let p3 = this.$store.dispatch('indexDataGet', {type: 'packages'}).then(() => {
         this.getIndexData('packages')
@@ -258,8 +304,14 @@
       let p4 = this.$store.dispatch('indexDataGet', {type: 'recommends'}).then(() => {
         this.getIndexData('recommends')
       })
+      let p5 = this.$store.dispatch('indexDataGet', {type: 'males'}).then(() => {
+        this.getIndexData('males')
+      })
+      let p6 = this.$store.dispatch('indexDataGet', {type: 'females'}).then(() => {
+        this.getIndexData('females')
+      })
       
-      Promise.all([p1,p2,p3,p4]).then(() => {
+      Promise.all([p1,p2,p3,p4,p5,p6]).then(() => {
         uni.stopPullDownRefresh()
       })
       
@@ -291,16 +343,20 @@
   }
   
   .index-section {
+    margin-bottom: 30rpx;
+    
     .index-section-head {
       padding: 20rpx 30rpx;
       line-height: 30rpx;
+      border-bottom: 1rpx solid #EEEEEE;
+      margin-bottom: 20rpx;
       .title {
         color: #333333;
         font-weight: 400;
         font-size: 14px;
       }
       .more {
-        color: #666666;
+        color: #999999;
         font-size: 12px;
       }
     }
@@ -330,6 +386,18 @@
               color: #ccc;
             }
           }
+      }
+    }
+    
+    .index-section-content-list-item {
+      width: 220rpx;
+      margin-right: 15rpx;
+      margin-bottom: 15rpx;
+
+      .cover {
+        width: 220rpx;
+        height: 200rpx;
+        background: #EEEEEE;
       }
     }
     

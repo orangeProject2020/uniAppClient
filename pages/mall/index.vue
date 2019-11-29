@@ -1,6 +1,6 @@
 <template>
   <view page="page-mall-index">
-    <view class="navbar navbar-fix bg-primary" >
+    <view class="navbar navbar-fix bg-primary" :style="{opacity: navbar.opacity}">
       <view class="status_bar"></view>
       <view class="navbar-content" >
         <view class="navbar-item brand">
@@ -12,14 +12,17 @@
               <uni-icons type="search" size="15"></uni-icons>
             </view>
             <view class="">
-               <input type="text" value="" placeholder="搜索" class="input-search"/>
+               <input type="text" value="" placeholder="搜索" class="input-search" @click="goToMallUrl('/list')"/>
             </view>
           </view>
         </view>
         <view class="navbar-item text-right flex-item">
-          <view class="navbar-icon-right" @click="goCart">
-            <view class="icon-img">
+          <view class="navbar-icon-right" >
+            <view class="icon-img" @click="goCart">
               <image src="/static/icon/cart-white.png" mode="" class="icon-img"></image>
+            </view>
+            <view class="icon-img" @click="goToMallUrl('/list')">
+              <image src="/static/icon/category.png" mode="" class="icon-img"></image>
             </view>
           </view>
         </view>
@@ -28,7 +31,7 @@
     
     <swiper class="swiper-banner" :indicator-dots="swiper.indicatorDots" :autoplay="swiper.autoplay" :interval="swiper.interval"
       :duration="swiper.duration">
-      <swiper-item v-for="item in banners" :key="item.id">
+      <swiper-item v-for="item in indexData.mallBanners" :key="item.id">
         <view class="swiper-item" @click="bannerItemClick(item)">
           <view class="swiper-banner-img bg-light">
             <image :src="item.cover" :lazy-load="true" mode="" class="swiper-banner-img"></image>
@@ -86,6 +89,9 @@
     },
     data() {
       return {
+        navbar: {
+          opacity: 1
+        },
         swiper: {
           indicatorDots: true,
           autoplay: true,
@@ -100,7 +106,10 @@
         ],
         activeCategory: 0,
         activeCategoryName: '',
-        goodsList: []
+        goodsList: [],
+        indexData:{
+          mallBanners:[]
+        }
       }
     },
     methods:{
@@ -110,8 +119,36 @@
       goCart(){
         this.goToMallUrl('/cart')
       },
-      bannerItemClick(){
-        
+      bannerItemClick(item){
+        let type = item.type
+        console.log('/bannerItemClick type:' , type , item.link)
+        if (type == 'url') {
+          uni.navigateTo({
+            url: '/pages/extLink?url=' + encodeURIComponent(item.link)
+          })
+        } else if (type == 'page') {
+          
+          uni.navigateTo({
+            url:'/pages' + item.link,
+            success() {
+              console.log('/go to page success:' , item.link)
+            },
+            fail() {
+              console.log('/go to page fail:' , item.link)
+              let linkData = item.link.split('?')
+              console.log('/go to page tab:' , linkData[0], linkData[1])
+              uni.setStorageSync('index_jump_data', linkData[1])
+              uni.switchTab({
+                url:'/pages' + linkData[0]
+              })
+            }
+          })
+        } else if (type == 'pageMall') {
+          
+          uni.navigateTo({
+            url:'/pages/mall/wv?url=' + encodeURIComponent(item.link)
+          })
+        }
       },
       goToDetail(item) {
         this.goToMallUrl('/goods/detail?id=' + item.id)
@@ -122,6 +159,17 @@
         uni.navigateTo({
           url:'/pages/mall/wv?url=' + encodeURIComponent(url)
         })
+      },
+      async getIndexData(type = 'mallBanners') {
+        let datas = uni.getStorageSync('index_data_' + type)
+        if (!datas || datas.length <= 0) {
+          console.log('/getIndexData ' , type, ' from api')
+          await this.$store.dispatch('indexDataGet', {type: type})
+          datas = uni.getStorageSync('index_data_' + type)
+        } else {
+          console.log('/getIndexData ' , type, ' from storage')
+        }
+        this.indexData[type] = datas ? JSON.parse(datas) : []
       },
       async activeCategoryChange(item) {
         this.activeCategory = item.id
@@ -162,7 +210,7 @@
     async onLoad() {
       await this.getCategorys()
       this.activeCategoryChange(this.categorys[0])
-      
+      this.getIndexData()
     },
     async onShow() {
       let jumpData = uni.getStorageSync('index_jump_data') || ''
@@ -195,6 +243,11 @@
     },
     async onPullDownRefresh() {
       uni.stopPullDownRefresh()
+      
+      this.$store.dispatch('indexDataGet', {type: 'mallBanners'}).then(() => {
+        this.getIndexData('mallBanners')
+      })
+      
       await this.$store.dispatch('getCategorys', {status: 1, limit: 0 , business_id: config.businessId})
       let list = uni.getStorageSync('mall_categorys')
       this.categorys = list ? JSON.parse(list) : []
@@ -203,7 +256,22 @@
         uni.removeStorageSync('mall_goods_list_' + item.id)
       })
       this.activeCategoryChange(this.categorys[0])
-    }
+    },
+    onPageScroll(data) {
+      let scrollTop = data.scrollTop
+      if (scrollTop < 50) {
+        let num = 50 - scrollTop
+        if (num <= 0) {
+          this.navbar.opacity = 1
+        } else {
+          this.navbar.opacity = parseFloat((num / 50).toFixed(2))
+        }
+    
+      } else {
+        this.navbar.opacity = 1
+      }
+      // console.log(JSON.stringify(data))
+    },
   }
 </script>
 
