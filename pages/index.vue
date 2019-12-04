@@ -30,7 +30,7 @@
       <swiper-item v-for="item in indexData.banners" :key="item.id">
         <view class="swiper-item" @click="indexClickItem(item)">
           <view class="swiper-banner-img bg-light">
-            <image :src="item.cover" :lazy-load="true" mode="" class="swiper-banner-img"></image>
+            <image :src="item.cover"  mode="" class="swiper-banner-img"></image>
           </view>
         </view>
       </swiper-item>
@@ -43,7 +43,7 @@
         <view class="flex flex-item flex-wrap index-section-cate-nav text-center">
           <view class="item" v-for="item in indexData.categorys" :key="item.id" @click="indexClickItem(item)">
             <view class="cover bg-light">
-              <image :src="item.cover" :lazy-load="true" mode="" class="cover"></image>
+              <image :src="item.cover"  mode="" class="cover"></image>
             </view>
          
           </view>
@@ -51,7 +51,7 @@
         </view>
         <view class="flex-item text-center index-profit">
           <view class="icon">
-            <image :src="moneyImg" :lazy-load="true" mode="" class="icon"></image>
+            <image :src="moneyImg"  mode="" class="icon"></image>
           </view>
           <view class="countdowm" v-if="countdownData">
             <view class="title">
@@ -79,7 +79,7 @@
          <scroll-view class="index-section-content-box" scroll-x="true" scroll-left="0">
              <view class="item" v-for="item in indexData.packages" :key="item.id" @click="indexClickItem(item)">
                <view class="index-package-img bg-light">
-                 <image :src="item.cover" :lazy-load="true" mode="" class="index-package-img "></image>
+                 <image :src="item.cover"  mode="" class="index-package-img "></image>
                </view>
              </view>
 
@@ -101,7 +101,7 @@
       <view class="index-section-content">
         <view class="flex flex-wrap index-section-content-list">
           <view class="index-section-content-list-item" v-for="item in indexData.males" :key="item.id" @click="indexClickItem(item)">
-            <image :src="item.cover" :lazy-load="true" mode="" class="cover"></image>
+            <image :src="item.cover"  mode="" class="cover"></image>
           </view>
           
         </view>
@@ -121,7 +121,7 @@
       <view class="index-section-content">
         <view class="flex flex-wrap index-section-content-list">
           <view class="index-section-content-list-item" v-for="item in indexData.females" :key="item.id" @click="indexClickItem(item)">
-            <image :src="item.cover" :lazy-load="true" mode="" class="cover"></image>
+            <image :src="item.cover"  mode="" class="cover"></image>
           </view>
           
         </view>
@@ -143,7 +143,7 @@
          <scroll-view class="index-section-content-box" scroll-x="true" scroll-left="0">
              <view class="item" v-for="item in indexData.recommends" :key="item.id" @click="indexClickItem(item)">
                <view class="index-package-img bg-light">
-                 <image :src="item.cover" :lazy-load="true" mode="" class="index-package-img "></image>
+                 <image :src="item.cover"  mode="" class="index-package-img "></image>
                </view>
                <view class="title truncate">
                   {{item.title}}
