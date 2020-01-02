@@ -18,7 +18,7 @@
           </view>        
         </view>
         <view class="navbar-item text-right flex-item">
-          <view class="navbar-icon-right">
+          <view class="navbar-icon-right" @click="goToMsg">
             <uni-icons type="email" size="30" color="#333"></uni-icons>
           </view>
         </view>
@@ -36,7 +36,7 @@
       </swiper-item>
     </swiper>
     
-    <uni-notice-bar scrollable="true" show-icon="true" single="true" text="消息通知xxxxxxxxxxxxxxxxxxxxxxx" show-close="true" style="padding: 20rpx 30rpx;"></uni-notice-bar>
+    <uni-notice-bar scrollable="true" show-icon="true" single="true" :text="userMsg[0].info" show-close="true" style="padding: 20rpx 30rpx;" v-if="userMsg.length > 0" @click="goToMsg"></uni-notice-bar>
     
     <view class="index-section">
       <view class="flex " style="border-top: 1rpx solid #EEEEEE;">
@@ -192,7 +192,8 @@
           females:[]
         },
         moneyImg: config.moneyImg,
-        countdownData: null
+        countdownData: null,
+        userMsg:[]
       }
     },
     computed:{
@@ -275,6 +276,28 @@
           url:'/pages/mall/wv?url=' + encodeURIComponent(url)
         })
       },
+      goToMsg() {
+        let isLogin = uni.getStorageSync('user_auth_token') ? true : false
+        if (!isLogin) {
+          uni.navigateTo({
+            url: '/pages/auth/login'
+          })
+        } else {
+          this.goToMallUrl('/user/msg')
+        }
+      },
+      async getUserMsg() {
+        this.userMsg = []
+        let isLogin = uni.getStorageSync('user_auth_token') ? true : false
+        if (!isLogin){
+          return 
+        }
+        let ret = await this.$store.dispatch('getUserMsg', {limit: 1, status: 0})
+        console.log('/getUserMsg ret:', JSON.stringify(ret))
+        if (ret.code === 0){
+          this.userMsg = ret.data.rows.length ? ret.data.rows : []
+        }
+      }
       
     },
     async onLoad() {
@@ -286,7 +309,8 @@
       this.getIndexData('recommends')
       this.getIndexData('males')
       this.getIndexData('females')
-
+      
+      this.getUserMsg()
     },
 		onShow() {
 			this.getCountDown()
@@ -315,6 +339,7 @@
         uni.stopPullDownRefresh()
       })
       
+      this.getUserMsg()
       this.getCountDown()
     }
   }
@@ -390,14 +415,16 @@
     }
     
     .index-section-content-list-item {
-      width: 220rpx;
+      width: 160rpx;
+      padding: 30rpx;
       margin-right: 15rpx;
       margin-bottom: 15rpx;
 
       .cover {
-        width: 220rpx;
-        height: 200rpx;
+        width: 160rpx;
+        height: 160rpx;
         background: #EEEEEE;
+        border-radius: 12rpx;
       }
     }
     

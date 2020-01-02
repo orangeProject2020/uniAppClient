@@ -12,7 +12,7 @@
           <input type="text" v-model="formData.mobile" class=" text-bold" required />
         </view>
       </view>
-      
+
       <view class="mb-4">
         <view class="text-light ">
           Verify Code / 验证码
@@ -20,11 +20,11 @@
         <view class="border-b p-2">
           <input type="text" v-model="formData.verify_code" class=" text-bold" required />
         </view>
-        <view class="text-primary mt-2">
-          点击发送验证码
+        <view class="text-primary mt-2" @click="getVerifyCode">
+          {{verifyCodeMsgBtn.text}}
         </view>
       </view>
-      
+
       <view class="mb-4">
         <view class="text-light ">
           Password / 密码
@@ -33,8 +33,8 @@
           <input type="text" v-model="formData.password" password="" class=" text-bold" required />
         </view>
       </view>
-      
-      
+
+
       <view class="text-primary " @click="navBackLogin">
         <view class="">
           已有账号，返回登录
@@ -64,15 +64,64 @@
         formData: {
           mobile: '',
           password: '',
-          verify_code:''
+          verify_code: ''
         },
-        passwordAgain:'',
+        passwordAgain: '',
         platform: '',
-        device: ''
+        device: '',
+        verifyCodeMsgBtn: {
+          disabled: false,
+          text: "点击发送验证码",
+          num: 60
+        },
       }
     },
 
     methods: {
+      async getVerifyCode() {
+        if (this.formData.mobile.length != 11) {
+          // this.$toast.fail("请输入正确的手机号码");
+          uni.showToast({
+            title: "请输入正确的手机号码",
+            icon: "none",
+            duration: 1000
+          });
+          return;
+        }
+
+        this.verifyCodeMsgBtn.disabled = true;
+        if (this.verifyCodeMsgBtn.num == 60) {
+          // 发送验证码
+          let ret = await this.$store.dispatch('getVerifyCode', {
+            mobile: this.formData.mobile
+          });
+          console.log('/getVerifyCode ret:', ret)
+          if (ret.code != 0) {
+            this.verifyCodeMsgBtn.num = 1;
+            // this.$toast.fail();
+            uni.showToast({
+              title: ret.message || "发送失败",
+              icon: "none",
+              duration: 1000
+            });
+          }
+        }
+        let num = this.verifyCodeMsgBtn.num - 1;
+
+        if (num == 0) {
+          this.verifyCodeMsgBtn.disabled = false;
+          num = 60;
+          this.verifyCodeMsgBtn.num = num;
+          this.verifyCodeMsgBtn.text = '点击发送验证码'
+        } else {
+          this.verifyCodeMsgBtn.text = `(${num})s后重发`;
+          // console.log("/getVerifyCode:", this.verifyCodeMsgBtn);
+          this.verifyCodeMsgBtn.num = num;
+          setTimeout(() => {
+            this.getVerifyCode();
+          }, 1000);
+        }
+      },
       async onReg() {
         let data = this.formData
         data.platform = this.platform
@@ -97,13 +146,13 @@
           });
           return
         }
-        
+
         this.isLoading = true
         this.isDisabled = true
 
         try {
           console.log('/onReg data', JSON.stringify(data, null, 2))
-          let ret = await this.$store.dispatch('authRegister',data)
+          let ret = await this.$store.dispatch('authRegister', data)
           console.log('/onReg ret', JSON.stringify(ret, null, 2))
           if (ret.code === 0) {
             let loginRetData = ret.data
@@ -120,20 +169,20 @@
           //TODO handle the exception
           let errMsg = e.message || '登录失败，请稍后重试'
           uni.showToast({
-            title: errMsg ,
+            title: errMsg,
             icon: "none",
             duration: 1000
           });
-          
+
         }
-        
-        setTimeout(()=>{
+
+        setTimeout(() => {
           this.isLoading = false
           this.isDisabled = false
-        },1000)
+        }, 1000)
 
       },
-      navBackLogin(){
+      navBackLogin() {
         uni.navigateBack({
           delta: 1
         })

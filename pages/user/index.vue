@@ -15,7 +15,7 @@
         <view class="navbar-item flex-item text-right">
           <view class="navbar-icon-right">
             <uni-icons type="gear" size="30" color="#fff" class="icon" @click="goToInfoPage"></uni-icons>
-            <uni-icons type="email" size="30" color="#fff" class="icon"></uni-icons>
+            <uni-icons type="email" size="30" color="#fff" class="icon" @click="goToUrl('userMsg')"></uni-icons>
           </view>
         </view>
       </view>

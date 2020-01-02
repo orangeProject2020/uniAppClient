@@ -7,6 +7,11 @@ export default {
     return ret
   },
   
+  async getVerifyCode(store, data) {
+    let ret = await Request.post('/utils/sms/sendVerifyCode', data)
+    return ret
+  },
+  
   async authLogin(store, data) {
     let ret = await Request.post('/user/auth/login', data)
     return ret

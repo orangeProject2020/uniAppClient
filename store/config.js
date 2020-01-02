@@ -1,9 +1,9 @@
 const isDev = (process.env.NODE_ENV === 'development') ? true : false
 const devHost = 'http://127.0.0.1:10013'
-const prodHost = 'http://mall.jianpiane.com'
+const prodHost = 'http://mall.sunonenight.com'
 
 const config = {
-  apiDomain: isDev ? 'http://127.0.0.1:10000' : 'http://api.jianpiane.com',
+  apiDomain: isDev ? 'http://127.0.0.1:10000' : 'http://api.sunonenight.com',
   channelId: '886',
   signKey: 'qsopifkhjjgjgfossfngnjgdsknkjlkljs',
   businessId: 0,
@@ -29,10 +29,11 @@ const config = {
     userInvite: '/user/invite',
     userInviteList: '/user/invite',
     aboutExtLink:  '/about',
-    protocolExtLink:'/protocol'
+    protocolExtLink:'/protocol',
+    userMsg: '/user/msg'
   },
   
-  moneyImg: isDev ? ('http://127.0.0.1:10021/uploads/app/money.gif') : ('http://img.jianpiane.com/uploads/app/money.gif') 
+  moneyImg: isDev ? ('http://127.0.0.1:10021/uploads/app/money.gif') : ('http://img.sunonenight.com/uploads/app/money.gif') 
 }
 
 
