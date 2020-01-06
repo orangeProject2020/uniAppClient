@@ -29,7 +29,10 @@
       </view>
     </view>
     
-    <swiper class="swiper-banner" :indicator-dots="swiper.indicatorDots" :autoplay="swiper.autoplay" :interval="swiper.interval"
+    <view class="page-mall-head">
+      
+    </view>
+    <!-- <swiper class="swiper-banner" :indicator-dots="swiper.indicatorDots" :autoplay="swiper.autoplay" :interval="swiper.interval"
       :duration="swiper.duration">
       <swiper-item v-for="item in indexData.mallBanners" :key="item.id">
         <view class="swiper-item" @click="bannerItemClick(item)">
@@ -38,12 +41,12 @@
           </view>
         </view>
       </swiper-item>
-    </swiper>
+    </swiper> -->
     
-    <view class="p-3">
+    <!-- <view class="p-3">
       <view class="border-b">
       </view>
-    </view>
+    </view> -->
     
     <view class="flex">
       <view class="category-navs" v-model="activeCategory">
@@ -276,7 +279,10 @@
 </script>
 
 <style lang="less">
-  
+  .page-mall-head {
+    margin-top: var(--status-bar-height);
+    padding-top: 100rpx;
+  }
   .swiper-banner {
     height: 200rpx ;
     margin-top: var(--status-bar-height);

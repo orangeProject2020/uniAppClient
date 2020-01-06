@@ -11,5 +11,6 @@ export default {
     profit: 0,
     withdraw: 0
   },
+  userOrders: [0,0,0],
 	timestampVal: 0
 }

@@ -15,6 +15,9 @@ const store = new Vuex.Store({
       userAesstsSet(state, data) {
         state.userAssets = data
       },
+      userOrdersSet(state, data) {
+        state.userOrders = data
+      },
       lastLoginSet(state, data) {
         state.lastLogin = data
       }

@@ -48,7 +48,7 @@
           ￥{{(userAssets.balance / 100).toFixed(2)}}
         </view>
         <view class="assets-title">
-          可提金额
+          可提余额
         </view>
       </view>
       <view class="uni-flex-item">
@@ -61,10 +61,10 @@
       </view>
       <view class="uni-flex-item">
         <view class="assets-num">
-          {{userAssets.withdraw}}
+          ￥{{(userAssets.withdraw / 100).toFixed(2)}}
         </view>
         <view class="assets-title">
-          可用道具
+          提现额度
         </view>
       </view>
     </view>
@@ -84,7 +84,7 @@
             <image src="/static/icon/order_0.png" mode="" class="icon"></image>
           </view>
           <view class="">
-            未付款
+            未付款 <text class="order-count" v-if="userOrders[0] > 0">{{userOrders[0] > 99 ? '99+' : userOrders[0]}}</text>
           </view>
         </view>
 
@@ -93,7 +93,7 @@
             <image src="/static/icon/order_1.png" mode="" class="icon"></image>
           </view>
           <view class="">
-            待发货
+            待发货 <text class="order-count" v-if="userOrders[1] > 0">{{userOrders[1] > 99 ? '99+' : userOrders[1]}}</text>
           </view>
         </view>
 
@@ -102,7 +102,7 @@
             <image src="/static/icon/order_2.png" mode="" class="icon"></image>
           </view>
           <view class="">
-            待收货
+            待收货 <text class="order-count" v-if="userOrders[2] > 0">{{userOrders[2] > 99 ? '99+' : userOrders[2]}}</text>
           </view>
         </view>
 
@@ -259,6 +259,7 @@
     uniIcons
   } from '@dcloudio/uni-ui';
   import config from '@/store/config.js';
+  import utils from '@/store/utils.js';
   export default {
     components: {
       uniIcons
@@ -289,6 +290,9 @@
       userAssets() {
         return this.$store.state.userAssets
       },
+      userOrders() {
+        return this.$store.state.userOrders
+      },
       lastLogin() {
         return this.$store.state.lastLogin
       }
@@ -303,6 +307,9 @@
       },
       goToUrl(type) {
         // let token = uni.getStorageSync('user_auth_token')
+        if (type == 'mallWithdrawApply'){
+          this.$store.commit('lastLoginSet',  false)
+        }
         
         if (!this.isLogin) {
           this.navToLogin()
@@ -395,6 +402,11 @@
             if (assetsRet.code !== 0) {
               throw new Error('获取用户信息出现错误，请稍后重试')
             }
+            let ordersRet = await this.getUserOrders(userId)
+            if (assetsRet.code !== 0) {
+              // throw new Error('获取用户信息出现错误，请稍后重试')
+            }
+            
           } else {
             throw new Error('获取用户信息失败，请稍后重试')
           }
@@ -428,6 +440,20 @@
           })
         }
         return ret
+      },
+      async getUserOrders(userId) {
+        let ret = await this.$store.dispatch('userOrdersGet', {
+          user_id: userId
+        })
+        console.log('/getUserOrders ret:', JSON.stringify(ret, null, 2))
+        if (ret.code == 0) {
+          this.$store.commit('userOrdersSet', [
+            ret.data[0],
+            ret.data[1],
+            ret.data[2]
+          ])
+        }
+        return ret
       }
     },
     onLoad() {
@@ -443,11 +469,18 @@
     onShow() {
       // uni.setStorageSync('user_auth_token', '')
       let token = uni.getStorageSync('user_auth_token')
-      console.log('token:', token)
+      console.log('/onshow token:', token)
       this.isLogin = token ? true : false
+      
+      let forceRefresh = utils.forceRefresh()
+      console.log('/onShow forceRefresh:', forceRefresh ? '1': '0')
+      if (forceRefresh) {
+        this.$store.commit('lastLoginSet', false)
+      }
 
       if (!this.lastLogin && this.isLogin) {
         this.getUserInfo()
+        // this.getUserOrders()
         // this.lastLogin = true
         this.$store.commit('lastLoginSet', true)
       }
@@ -463,6 +496,7 @@
           profit: 0,
           withdraw: 0
         })
+        this.$store.commit('userOrdersSet', [0,0,0])
       }
       // if (!token) {
       //   this.navToLogin()
@@ -488,6 +522,7 @@
 
       if (this.isLogin) {
         this.getUserInfo()
+        // this.getUserOrders()
       }
 
       setTimeout(() => {
@@ -515,7 +550,7 @@
           width: 120rpx;
           height: 120rpx;
           display: inline-block;
-          background: #FFFFFF;
+          background: #fafafa;
           border-radius: 120rpx;
         }
 
@@ -601,5 +636,17 @@
     width: 60rpx;
     height: 60rpx;
     display: inline-block;
+  }
+  
+  .order-count {
+    color: #FFFFFF;
+    background: #e53e3e;
+    font-size: 10px;
+    border-radius: 100%;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
   }
 </style>

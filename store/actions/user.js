@@ -17,6 +17,11 @@ export default {
     return ret
   },
   
+  async userOrdersGet(store , data = {}) {
+    let ret = await Request.post('/mall/user/infoOrders' , data)
+    return ret
+  },
+  
   async getUserMsg(store, data = {}) {
     let ret = await Request.post('/user/message/listUser' , data)
     return ret

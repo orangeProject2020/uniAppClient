@@ -24,7 +24,7 @@ const config = {
     orderAfter: '/order/after',
     orderComment: '/order/comment',
     mallProfit:  '/user/profit',
-    mallWithdrawApply: '/user/withdraw',
+    mallWithdrawApply: '/user/withdrawApply',
     mallWithdrawList: '/user/withdraw',
     userInvite: '/user/invite',
     userInviteList: '/user/invite',
