@@ -71,7 +71,7 @@
       </view>
     </view>
 
-    <view class="flex p-3 border-b" @click="goToExtLink(protocol)">
+    <view class="flex p-3 border-b" @click="goToProtocol">
       <view class="flex-item">
         <view class="setting-title">
           用户协议
@@ -83,7 +83,7 @@
       </view>
     </view>
     
-    <view class="flex p-3 border-b" @click="goToExtLink(aboutLink)">
+    <!-- <view class="flex p-3 border-b" @click="goToExtLink(aboutLink)">
       <view class="flex-item">
         <view class="setting-title">
           关于
@@ -93,7 +93,7 @@
         <text></text>
         <uni-icons type="arrowright"></uni-icons>
       </view>
-    </view>
+    </view> -->
     
     <view class="flex p-3 border-b" @click="onLogout">
       <view class="flex-item">
@@ -187,6 +187,11 @@
         console.log('goToExtLink:',url)
         uni.navigateTo({
           url: '/pages/mall/wv?url=' + encodeURIComponent(url)
+        })
+      },
+      goToProtocol() {
+        uni.navigateTo({
+          url:'/pages/user/protocol'
         })
       },
       async checkUpdate() {

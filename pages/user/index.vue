@@ -55,7 +55,7 @@
         <view class="assets-num price">
           ￥{{(userAssets.profit / 100).toFixed(2)}}
         </view>
-        <view class="assets-title">
+        <view class="assets-title" @click="goToUrl('mallProfitRule')">
           预计分红 <uni-icons type="help" size="15" color="#999"></uni-icons>
         </view>
       </view>
@@ -202,14 +202,14 @@
           </view>
         </view> -->
 
-        <!-- <view class="item" @click="goToUrl('orderAfter')">
+        <view class="item" @click="goToUrl('orderAfter')">
           <view class="">
             <image src="/static/icon/order_after.png" mode="" class="icon"></image>
           </view>
           <view class="">
             售后
           </view>
-        </view> -->
+        </view>
 
         <view class="item" @click="goToUrl('userInvite')">
           <view class="">
