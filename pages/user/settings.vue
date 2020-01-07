@@ -83,7 +83,7 @@
       </view>
     </view>
     
-    <!-- <view class="flex p-3 border-b" @click="goToExtLink(aboutLink)">
+    <view class="flex p-3 border-b" @click="goToAbout">
       <view class="flex-item">
         <view class="setting-title">
           关于
@@ -93,7 +93,7 @@
         <text></text>
         <uni-icons type="arrowright"></uni-icons>
       </view>
-    </view> -->
+    </view>
     
     <view class="flex p-3 border-b" @click="onLogout">
       <view class="flex-item">
@@ -192,6 +192,11 @@
       goToProtocol() {
         uni.navigateTo({
           url:'/pages/user/protocol'
+        })
+      },
+      goToAbout() {
+        uni.navigateTo({
+          url:'/pages/user/about'
         })
       },
       async checkUpdate() {

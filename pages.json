@@ -73,6 +73,12 @@
     	}
     },
     {
+    	"path": "pages/user/about",
+    	"style": {
+    		"navigationBarTitleText": "关于"
+    	}
+    },
+    {
     	"path": "pages/auth/login",
     	"style": {
     		"navigationBarTitleText": "登录",
