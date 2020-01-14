@@ -16,6 +16,7 @@
           <view class="navbar-icon-right">
             <uni-icons type="gear" size="30" color="#fff" class="icon" @click="goToInfoPage"></uni-icons>
             <uni-icons type="email" size="30" color="#fff" class="icon" @click="goToUrl('userMsg')"></uni-icons>
+            <view class="dot" v-if="userMsgNoReadConut > 0"></view>
           </view>
         </view>
       </view>
@@ -56,7 +57,7 @@
           ￥{{(userAssets.profit / 100).toFixed(2)}}
         </view>
         <view class="assets-title" @click="goToUrl('mallProfitRule')">
-          预计分红 <uni-icons type="help" size="15" color="#999"></uni-icons>
+          已获分红 <uni-icons type="help" size="15" color="#999"></uni-icons>
         </view>
       </view>
       <view class="uni-flex-item">
@@ -295,6 +296,9 @@
       },
       lastLogin() {
         return this.$store.state.lastLogin
+      },
+      userMsgNoReadConut() {
+        return this.$store.state.userMsgNoReadConut
       }
     },
     methods: {

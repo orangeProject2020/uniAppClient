@@ -20,6 +20,12 @@ const store = new Vuex.Store({
       },
       lastLoginSet(state, data) {
         state.lastLogin = data
+      },
+      userMsgNoReadConutSet(state, data) {
+        state.userMsgNoReadConut = data
+      },
+      userMsgRefreshSet(state, data) {
+        state.userMsgRefresh = data
       }
     },
     actions: ACTIONS

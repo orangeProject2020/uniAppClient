@@ -25,5 +25,11 @@ export default {
   async getUserMsg(store, data = {}) {
     let ret = await Request.post('/user/message/listUser' , data)
     return ret
+  },
+  
+  async getUserMsgCountNoRead(store, data= {}) {
+    let ret = await Request.post('/user/message/noReadCount', data)
+    return ret
   }
+  
 }

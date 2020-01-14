@@ -28,7 +28,7 @@ const config = {
     mallWithdrawApply: '/user/withdrawApply',
     mallWithdrawList: '/user/withdraw',
     userInvite: '/user/invite',
-    userInviteList: '/user/invite',
+    userInviteList: '/user/invite?active=logs',
     aboutExtLink:  '/about',
     protocolExtLink:'/protocol',
     userMsg: '/user/msg'

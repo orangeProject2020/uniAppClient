@@ -12,5 +12,7 @@ export default {
     withdraw: 0
   },
   userOrders: [0,0,0],
-	timestampVal: 0
+	timestampVal: 0,
+  userMsgNoReadConut: 0,
+  userMsgRefresh: false
 }

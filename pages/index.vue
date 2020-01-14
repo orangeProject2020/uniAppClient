@@ -20,6 +20,7 @@
         <view class="navbar-item text-right flex-item">
           <view class="navbar-icon-right" @click="goToMsg">
             <uni-icons type="email" size="30" color="#333"></uni-icons>
+            <view class="dot" v-if="userMsgNoReadConut > 0"></view>
           </view>
         </view>
       </view>
@@ -174,6 +175,7 @@
     },
     data() {
       return {
+        isLogin: false,
         navbar: {
           opacity:1
         },
@@ -193,7 +195,8 @@
         },
         moneyImg: config.moneyImg,
         countdownData: null,
-        userMsg:[]
+        userMsg:[],
+        userMsgNoReadConut: 0
       }
     },
     computed:{
@@ -283,6 +286,7 @@
             url: '/pages/auth/login'
           })
         } else {
+          this.$store.commit('userMsgRefreshSet', true)
           this.goToMallUrl('/user/msg')
         }
       },
@@ -297,7 +301,16 @@
         if (ret.code === 0){
           this.userMsg = ret.data.rows.length ? ret.data.rows : []
         }
-      }
+        
+        let retCount = await this.$store.dispatch('getUserMsgCountNoRead')
+        console.log('/getUserMsg retCount:', JSON.stringify(retCount))
+        if (retCount.code === 0) {
+          this.userMsgNoReadConut = ret.data.count || 0
+          this.$store.commit('userMsgNoReadConutSet' , this.userMsgNoReadConut)
+        }
+        
+        this.$store.commit('userMsgRefreshSet', false)
+      },
       
     },
     async onLoad() {
@@ -314,6 +327,10 @@
     },
 		onShow() {
 			this.getCountDown()
+      
+      if (this.$store.state.userMsgRefresh) {
+        this.getUserMsg()
+      }
 		},
     onPullDownRefresh() {
       let p1 = this.$store.dispatch('indexDataGet', {type: 'banners'}).then(() => {

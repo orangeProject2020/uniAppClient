@@ -103,7 +103,10 @@
             let token = loginRetData.token
             console.log('/onLogin token:', token)
             uni.setStorageSync('user_auth_token', token)
-            uni.navigateBack({})
+            // uni.navigateBack({})
+            uni.switchTab({
+              url:'/pages/user/index'
+            })
           } else {
             throw new Error(ret.message)
           }
